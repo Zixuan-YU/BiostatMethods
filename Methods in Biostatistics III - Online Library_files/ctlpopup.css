@@ -1,0 +1,54 @@
+div#ctlpopupBoxBG {
+	width:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	background:#000;
+	z-index:5000;
+}
+
+div#ctlpopupBox {
+	width:80%;
+	position:absolute;
+	top:10%;
+	left:10%;
+	background:#fff;
+	border-radius:6px;
+	z-index:5001;
+}
+
+div#ctlpopupBoxContent {
+	padding:10px 0;
+}
+
+div#ctlpopupBoxHeader {
+	background-color:#dfdfdf;
+	border-bottom:1px solid #bbb;
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;
+}
+
+div#ctlpopupBoxTitle {
+	padding:5px;
+	margin:0;
+}
+div#ctlpopupBoxTitle h1 {
+	padding:5px;
+}
+
+div#ctlpopupBoxHeaderControls {
+	text-align:right;
+}
+
+div#ctlpopupBoxHeaderControls .ctlpopupUIButton {
+	margin:3px;
+}
+
+div#ctlpopupWaitingGifContainer {
+	width:100%;
+	padding-left:50%;
+}
+div#ctlpopupWaitingGifContainer img {
+	margin-left:-64px;
+}
+

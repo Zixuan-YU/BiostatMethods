@@ -1,0 +1,8 @@
+(function(){
+	const ckEditorLocalDir = "/core/views/common/javascripts/ckeditor/";
+	if(!window.CKEDITOR){
+		ctltScript.ckeditorLocation = ckEditorLocalDir;
+		ctltScript.loadCkEditor((ctltScript.ckeditor.ver) ? ctltScript.ckeditor.ver : ctltScript.defaultVersions.ckeditor, ('loadjQueryAdapter' in ctltScript.ckeditor && (ctltScript.ckeditor.loadjQueryAdapter == 1 || Number(parseInt(ctltScript.ckeditor.loadjQueryAdapter)) == 1)))
+	}
+	document.write(`<script type="text/javascript" src="${ckEditorLocalDir}loadCustomConfig.js"><\/script>`);     
+})();

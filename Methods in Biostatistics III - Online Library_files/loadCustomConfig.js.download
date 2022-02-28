@@ -1,0 +1,387 @@
+/******************************************
+	This custom config is the setup for
+	all ckeditor instances in CTL.  please
+	use caution when editing this.
+******************************************/
+
+
+
+if(typeof CKEDITOR == 'object') {
+	CKEDITOR.plugins.addExternal( 'MediaEmbed', '/core/views/common/javascripts/ckeditor/plugins/mediaembed/', 'plugin.js' );
+	//CKEDITOR.plugins.addExternal( 'aspell', '/core/views/common/javascripts/ckeditor/plugins/aspell/', 'plugin.js' );
+	CKEDITOR.plugins.addExternal( 's3Upload', '/core/views/common/javascripts/ckeditor/plugins/s3Upload/', 'plugin.js' );
+	CKEDITOR.plugins.addExternal( 'pbPublicPage', '/core/views/common/javascripts/ckeditor/plugins/pbPublicPage/', 'plugin.js' );
+	CKEDITOR.plugins.addExternal( 'drawingboard', '/core/views/common/javascripts/ckeditor/plugins/drawingboard/', 'plugin.js' );
+	CKEDITOR.plugins.addExternal( 'wordcount', '/core/views/common/javascripts/ckeditor/plugins/wordcount/', 'plugin.js' );
+
+	CKEDITOR.plugins.addExternal( 'scayt', '/core/views/common/javascripts/ckeditor/plugins/scayt/', 'plugin.js' );
+	// ---- adding jsPlusTableTools as a package...
+	var jsPlusTableTools = 'jsplus_table_new,jsplus_table_conf,jsplus_table_row_conf,jsplus_table_col_conf,jsplus_table_cell_conf,jsplus_table_row_move_up,jsplus_table_row_move_down,jsplus_table_col_move_left,jsplus_table_col_move_right,jsplus_table_add_row_up,jsplus_table_add_row_down,jsplus_table_add_col_left,jsplus_table_add_col_right,jsplus_table_add_cell_left,jsplus_table_add_cell_right,jsplus_table_delete_col,jsplus_table_delete_row,jsplus_table_delete_cell,jsplus_table_merge_cells,jsplus_table_merge_cell_right,jsplus_table_merge_cell_down,jsplus_table_split_cell_hor,jsplus_table_split_cell_vert';
+	var jsPlusTableToolsA = jsPlusTableTools.split(',');
+
+	jsPlusTableToolsA.forEach(function(element, index, array) {
+		CKEDITOR.plugins.addExternal( element, '/core/views/common/javascripts/ckeditor/plugins/jsplusTableTools/'+element+'/', 'plugin.js');
+	});
+	// ---- /added jsPlusTableTools
+
+
+	//set defaults:
+	CKEDITOR.config.uiColor = '#f7f7f7';
+    CKEDITOR.config.resize_enabled = false;
+	CKEDITOR.config.skin = 'moono-lisa';
+
+	CKEDITOR.config.title = false;
+	CKEDITOR.config.extraPlugins='mentions,emoji,scayt,mathjax,find,selectall,colorbutton,justify,wordcount,MediaEmbed,s3Upload,iframe,drawingboard,pbPublicPage,pastefromword,'+jsPlusTableTools;
+	CKEDITOR.config.removePlugins='autosave,elementspath,exportpdf';
+
+	CKEDITOR.config.toolbar = 'ctltStandart';
+	CKEDITOR.config.stylesCombo_stylesSet = 'ded_styles:/core/views/common/javascripts/ckeditor/styles.js';
+
+	CKEDITOR.config.mentions = [ { feed: [], minChars: 0 } ];
+
+	CKEDITOR.config.forcePasteAsPlainText = 'allow-word';
+	CKEDITOR.config.pasteFromWordRemoveFontStyles = false;
+	CKEDITOR.config.pasteFromWordRemoveStyles = false;
+	CKEDITOR.config.allowedContent = false;
+	CKEDITOR.config.pasteFilter = null;
+	//allow img and iframe tags
+	CKEDITOR.config.extraAllowedContent = {
+		'img' : {
+			styles: '*',
+			attributes: '*',
+			classes: '*'
+		},
+		'iframe'  : {
+			styles: '*',
+			attributes: '*',
+			classes: '*'
+		}
+	};
+	CKEDITOR.config.disallowedContent = 'script; *[on*]';
+	//config mathJax lib path.  check to see if ctltScript exists, if so, use that
+	CKEDITOR.config.mathJaxLib = (typeof ctltScript != 'undefined') ? ctltScript.mathJaxLocation : '\/\/cdn.mathjax.org\/mathjax\/latest\/MathJax.js?config=TeX-AMS_HTML';
+
+	//config editor to use BR for enters
+	CKEDITOR.config.fillEmptyBlocks = false;
+
+	//if cke is getting loaded from our servers then make lang as en
+	if((typeof ctltScript != 'undefined') && ctltScript.ckeditorLocation == "/core/views/common/javascripts/ckeditor/"){
+		CKEDITOR.config.language = "en";
+	}
+
+	//define toolbars: (defaults to ctltstandart)
+
+	/************
+		jsPlus table tools should be included as such:
+
+		['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert']
+
+	*************/
+
+
+	CKEDITOR.config.toolbar_ctltBasic =
+	[
+	    ['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink']
+	];
+
+	CKEDITOR.config.toolbar_ctltStandart =
+	[
+	    ['Undo','Source','-', 'SpellCheck'],
+	    ['PasteText','PasteFromWord','MediaEmbed','s3Upload','pbPublicPage','DrawingBoard'],
+	    ['-','RemoveFormat'],
+	    ['Bold','-','Italic','Underline','Strike','-','Subscript','Superscript'],
+		['Link','Unlink'],
+		['TextColor','BGColor'],
+	    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+	    ['SpecialChar','Mathjax'],
+	    ['Styles'],
+		['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert']
+	];
+
+	CKEDITOR.config.toolbar_standardWithS3 =
+	[
+	    ['Undo','Source','-', 'SpellCheck'],
+	    ['PasteText','PasteFromWord','MediaEmbed','s3Upload','pbPublicPage','DrawingBoard'],
+	    ['-','RemoveFormat'],
+	    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+		['Link','Unlink'],
+		['TextColor','BGColor'],
+	    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+	    ['SpecialChar','Mathjax'],
+	    ['Styles'],
+	    ['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert']
+	];
+
+
+	// app specific toolbars
+	CKEDITOR.config.toolbar_bbs =
+	[
+		['Undo','Source','-', 'SpellCheck'],
+		['PasteText','PasteFromWord','MediaEmbed','s3Upload','pbPublicPage','DrawingBoard'],
+		['RemoveFormat'],
+		['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+		['Link','Unlink'],
+		['TextColor','BGColor'],
+		['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+		['Styles'],
+	    ['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert']
+	];
+
+	CKEDITOR.config.toolbar_syl =
+	[
+	    ['Undo','Source','-', 'SpellCheck'],
+	    ['PasteText','PasteFromWord','MediaEmbed','s3Upload','pbPublicPage','DrawingBoard'],
+	    ['-','RemoveFormat'],
+	    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+		['Link','Unlink'],
+		['TextColor','BGColor'],
+	    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+	    ['SpecialChar','Mathjax'],
+	    ['Styles'],
+	    ['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert']
+	];
+
+	CKEDITOR.config.toolbar_standardEmail =
+	[
+	    ['Undo','Source','-', 'SpellCheck'],
+	    ['PasteText','PasteFromWord','MediaEmbed','s3Upload','pbPublicPage','DrawingBoard'],
+	    ['-','RemoveFormat'],
+	    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+		['Link','Unlink'],
+		['TextColor','BGColor'],
+	    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+	    ['SpecialChar'],
+	    ['Styles'],
+	    ['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert']
+	];
+
+
+	CKEDITOR.config.toolbar_qgTake =
+	[
+	    ['Undo','Source','-', 'SpellCheck'],
+	    ['PasteText','PasteFromWord','DrawingBoard'],
+	    ['-','RemoveFormat'],
+	    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+		['Link','Unlink'],'/',['TextColor','BGColor'],
+	    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+	    ['SpecialChar','Mathjax'],
+	    ['Styles'],
+	    ['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert']
+	];
+
+	CKEDITOR.config.toolbar_pbDefault =
+	[
+	    ['Undo','Source','-', 'SpellCheck'],
+	    ['PasteText','PasteFromWord','MediaEmbed','DrawingBoard'],
+	    ['-','Find','Replace','-','RemoveFormat'],
+	    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+		['Link','Unlink'],['TextColor','BGColor'],
+	    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+	    ['SpecialChar','Mathjax'],
+	    ['Font','FontSize'],
+		['Preview'],
+	    ['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert']
+	];
+
+	CKEDITOR.config.toolbar_wiki =
+	[
+	    ['Undo','Source','-', 'SpellCheck'],
+	    ['Cut','Copy','Paste','PasteText','PasteFromWord','MediaEmbed','s3Upload', 'DrawingBoard'],
+	    ['-','RemoveFormat'],
+	    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+	 	['Link','Unlink'],['TextColor','BGColor'],
+	    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+	    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+	    ['HorizontalRule','SpecialChar','Mathjax'],
+	    ['Styles','-','Save'],
+	    ['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert']
+    ];
+
+    CKEDITOR.config.toolbar_portfolio =
+    [
+	    ['Source','-', 'SpellCheck'],
+	    ['PasteText','PasteFromWord','MediaEmbed','s3Upload','pbPublicPage'],
+	    ['-','RemoveFormat'],
+	    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+		['Link','Unlink'],
+		['TextColor','BGColor'],
+	    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+	    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+	    ['SpecialChar','Mathjax'],
+	    ['Styles'],
+	    ['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert']
+	];
+
+
+
+
+	//for tester.  this has everything
+	CKEDITOR.config.toolbar_test =
+	[
+	    ['Source','-', 'SpellCheck'],
+	    ['Cut','Copy','Paste','PasteText','PasteFromWord','MediaEmbed','s3Upload','pbPublicPage','DrawingBoard'],
+	    ['-','RemoveFormat'],
+	    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+		['Link','Unlink'],
+		['TextColor','BGColor'],
+	    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+	    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+	    ['HorizontalRule','SpecialChar','Mathjax'],
+	    ['Table','jsplus_table_new','jsplus_table_conf','jsplus_table_row_conf','jsplus_table_col_conf','jsplus_table_cell_conf'],
+		['jsplus_table_row_move_up','jsplus_table_row_move_down','jsplus_table_col_move_left','jsplus_table_col_move_right'],
+		['jsplus_table_add_row_up','jsplus_table_add_row_down','jsplus_table_add_col_left','jsplus_table_add_col_right','jsplus_table_add_cell_left','jsplus_table_add_cell_right'],
+		['jsplus_table_delete_col','jsplus_table_delete_row','jsplus_table_delete_cell'],
+		['jsplus_table_merge_cells','jsplus_table_merge_cell_right','jsplus_table_merge_cell_down','jsplus_table_split_cell_hor','jsplus_table_split_cell_vert'],
+	    ['Styles'],['Preview']
+	];
+
+	//load only for PROD
+	if(window.location.origin == "https://courseplus.jhu.edu"){
+		document.write('<script src="https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js"><\/script>');
+		window.WEBSPELLCHECKER_CONFIG = {
+			// cke_wysiwyg_frame class get add to every iframe added with CKE enabled textarea.
+			autoStartup: true,
+			autoSearch: true,
+			enableAutoSearchIn: [ '.cke_wysiwyg_frame' ],
+			serviceId:"1:QPp411-QtwPk2-RltYx3-j84CP3-ozMvs4-mPzVT2-7aF944-OU3l81-Vb6ly-aNmkp2-uK4yx1-kq8"
+		};
+	}
+
+	CKEDITOR.on('instanceReady', function(ev){
+		ev.editor.dataProcessor.writer.setRules('p', {
+			indent : false,
+			breakBeforeOpen : false,
+			breakAfterOpen : false,
+			breakBeforeClose : false,
+			breakAfterClose : false
+		});
+		ev.editor.dataProcessor.writer.setRules('li', {
+			indent : false,
+			breakBeforeOpen : false,
+			breakAfterOpen : false,
+			breakBeforeClose : false,
+			breakAfterClose : false
+		});
+		ev.editor.dataProcessor.writer.setRules('ol', {
+			indent : false,
+			breakBeforeOpen : false,
+			breakAfterOpen : false,
+			breakBeforeClose : false,
+			breakAfterClose : false
+		});
+		ev.editor.dataProcessor.writer.setRules('ul', {
+			indent : false,
+			breakBeforeOpen : false,
+			breakAfterOpen : false,
+			breakBeforeClose : false,
+			breakAfterClose : false
+		});
+		ev.editor.dataProcessor.writer.setRules('br',
+         {
+             indent: false,
+             breakBeforeOpen: false,
+             breakAfterOpen: false,
+             breakBeforeClose: false,
+             breakAfterClose: false
+		});
+		ev.editor.on("beforeCommandExec", function(event) {
+			// As CKEditor discontinued pasteDialog From https://github.com/ckeditor/ckeditor4/issues/469#issuecomment-524185244
+			// Show the paste dialog for the paste buttons and right-click paste
+			if (event.data.name == "paste") {
+				event.editor._.forcePasteDialog = true;
+				//additional for checking data type to transfer data to editor
+				ev.editor.pasteDataType = event.data.commandData.type;
+			}
+			// Don't show the paste dialog for Ctrl+Shift+V
+			if (event.data.name == "pastetext" && event.data.commandData.from == "keystrokeHandler") {
+				event.cancel();
+			}
+		});
+		ev.editor.on("paste", function(event) {
+			if(ev.editor.pasteDataType == 'html'){
+				//use stored data and html type for pasteFromWord
+				event.data.type = 'html';
+				event.data.dataValue = ev.editor.pastedDataFromWord;
+			}
+		});
+		ev.editor.on("pasteFromWord", function(event) {
+			// store data in HTML format unfiltered
+			ev.editor.pastedDataFromWord = event.data.dataValue;
+		});
+
+		/***********************************************************
+		 	since we use js.plus.tabletools, we need to HAVE the
+		 	default ckeditor Table plugin instantiated in order for
+		 	the suite to work... however, we want to hide the icon of
+		 	the default ckeditor Table plugin so not to confuse our
+		 	users.  the following code does so, looking for the class
+		 	of the icons, and setting their displays to none.
+		 ***********************************************************/
+		var tableIcons = document.getElementsByClassName('cke_button__table');
+		for (var i = 0; i < tableIcons.length; i ++) {
+		    tableIcons[i].style.display = 'none';
+		}
+
+		/*************************************************************
+			when the editor runs a plugin that retrieves info from
+			the editing area, we need to parse the contents and
+			remove extra <p> and all &nbsp;'s
+		**************************************************************/
+		ev.editor.on('getData', function(ev) {
+			var rawData = ev.data.dataValue;
+			var noEmptyPtags= /<p[^>]*>(\s|&nbsp;|<br[^>]*>)*<\/p>|(&nbsp;)+/gmi;
+			var noMoreThanTwoBRs= /<br[^>]*>(&nbsp;|\s)*(<br[^>]*>)(&nbsp;|\s)*(<br[^>]*>)+/gmi;
+			rawData = rawData.replace(noEmptyPtags, ' ');
+			rawData = rawData.replace(noMoreThanTwoBRs, '<br /><br />');
+			ev.data.dataValue = rawData;
+		});
+
+		// removes tooltip when notification is shown and there is a tooltip for Close btn especially PB page
+		ev.editor.on( 'notificationHide', function( evt ) {
+			$('div.ui-tooltip.ui-corner-all.ui-widget-shadow.ui-widget.ui-widget-content').remove();
+		} );
+	});
+
+
+
+}

@@ -1,0 +1,1062 @@
+/* To target IE browsers, precede the style with the classes .ie7, .ie8, and/or .ie9 -- KIH 7-20-2010 */
+
+
+/*
+print styles
+*/
+@media print {
+body, #pageContent, #appMain	{float:none !important; margin:0 !important; padding:0 !important; width:99% !important;}
+
+#logoutBtn, #appMainNav, #appMain #tabs, #sidebar-wrapper {display:none !important;}
+
+.small text-center {clear:both !important;}
+
+.standardTable, .tableShaded {float:none !important; width:auto !important;}
+
+#altsToPrint {
+ 			display: none;
+	 	}
+#altsToPrint_print {
+	 			display: block !important;
+	 			border: #99d19a 1px dashed;
+	 			padding: 2%;
+	 			margin-top: 20px !important;
+	 			margin-bottom: 20px;
+	 			clear: both;
+	 			width: 94%;
+	 	}
+
+#wrapper {padding-left: 0 !important;}
+#page-content-wrapper { padding: 0 !important;}
+/* This gets rid of the URLs that bootstrap automatically inserts after weblinks */
+a[href]:after {content: none !important;}
+
+/* BBS Print Styles */
+#userNavBox, #BBSNavTop, #BBSNav, #mainPanelLevelActions, #quickReply, .actions, .cornerTL, .cornerTR, .cornerBR, .cornerBL, #bbsMainInfo .clearFloat,
+	#BBSNav + .shadowTab, #footer #machine, .miniBtn_imprt, #mainPanel .post .header .profilePhoto {display:none !important;}
+.shadow {background:none; width:100%; margin-left:0 !important; margin-right:0 !important; padding-left:0;}
+#mainPanelHeader {margin-left:0;}
+#mainPanelHeader h1 {padding-left:0; padding-right:0;}
+#mainPanel {border:none;background:none;}
+#mainPanel h1, #mainPanel h2, #mainPanel h3 {width:100%; margin-left:0; padding-left:0; background:none; color:#000 !important;}
+#mainPanel .post .banner, #mainPanel .post.original .banner {padding:0 !important; background:none; color:#000;}
+#mainPanel .post.original, #mainPanel .post.original .header, #mainPanel .post .header {background:none;}
+#mainPanel .post .header, #mainPanel .post.original {border:none;}
+#mainPanel .post .header + DIV {padding:0 !important;}
+#mainPanel .post {margin:0; padding-top:12px; background:none;}
+#appMain h1 {padding-left:0;}
+#mainPanel .post .agree {padding-bottom:24px;}
+#mainPanel table tr th, #mainPanel table tr td.catHdr {background:none; color:#000;}
+#mainPanel table tr td.category {padding-left:45px;}
+#mainPanel table tr td.catHdr {font-style:italic;}
+#mainPanel.digest .post .header {background:none;}
+#mainPanel.digest .post .header p {padding-left:0 !important;}
+#mainPanel h3 {margin-bottom:35px !important;}
+#mainPanel .post h3 {margin-bottom:0px !important;}
+
+
+/* THIS IS FOR GRADEBOOK ONLY -- HELPS DECLUTTER "ENTER GRADE" PAGE */
+input[value*="Email All Grades"], input[value*="Email Grade"] {display:none;}
+
+
+/* 	ISSUES:
+	GRADEBOOK: ENTER GRADES: DISPLAY GRADE OPTS BOX DOES NOT CONTAIN TEXT
+	GRADEBOOK: ENTER GRADES: MAIN PAGE: DOES NOT PRINT OUT NICELY, BUT IT'S NOT A PAGE LIKELY TO BE PRINTED
+
+	QUIZGEN: OVERVIEW: HAD TO SEPARATE (UN-FLOAT) LEFT AND RIGHT COLUMNS SO THEY WOULD NOT BE TRUNCATED, BUT I MADE THEM THE WIDTH OF THE PAGE, AND IT ACTUALLY LOOKS OK
+	QUIZGEN: OVERVIEW & SPECIAL PERMISSIONS: UNINTENDED PAGEBREAK AFTER HEADER
+
+	KHC 2-28-11
+ */
+}
+
+
+/*
+ *	Styles for my course list and my calendar
+ * 	on sitemain (logged in view of courseplus)
+ */
+
+.deptContainer {background:#e8e7f3 !important;margin-bottom:1em;padding:.3em;}
+/*.myCoursesList {float:left; width:65%;}*/
+.myCoursesList .row {margin-left:0;margin-right:0;padding:7px 0; width:100%;}
+.myCoursesList .column1 {padding-left:0;}
+/*.myCalendar {float:right;width:32%; margin-top:20px;}*/
+.blogBox .panel ul { padding-left:.8em; }
+.onlineCourseList {float:left; width:100%;}
+.courseListDept {float:left; display:inline-block; width:20%; margin-right:2%;padding:.9em 1em;}
+.courseListDept h5 {margin-top:0; color:#4A4A4A;}
+.courseTermAndList {float:right; display:inline-block; width:77%;background:#f2f1f8;margin:0;}
+.courseListTerm {float:left; display:inline-block; width:20%; margin-right:2%;color:#6C6C74;}
+.courseList {float:left; display:inline-block; width:77%;}
+.courseList .column1 {width:5em;}
+.courseList .column2 {padding-left:1em; width:80%;}
+.onlineCourseListRow {padding-top:1em;}
+
+.table-striped > tbody > tr:nth-child(2n+1) > th.h2 {background:#afabc1;color:#fff; margin:0; padding:0; text-align:center;}
+
+/* End styles for logged in courseplus sitemain */
+
+
+/*
+commonAppStyles.css
+*/
+
+
+form { margin:0; padding:0; }
+p { margin-top:0; padding-top:5px; margin-bottom:0; padding-bottom:5px; }
+table { font-size:100%; }
+/*#appMain ul, li {margin:0;margin-left:14px;padding:0;}*/
+#tabs ul, #tabs li, #appMainNav ul, #appMainNav li {margin-left:0;}
+/*#appMain a {color:#0081C2;text-decoration:underline;}
+#appMain a:hover {color:#00CCFF !important; text-decoration:underline;}
+#appMain a:visited {color:#0081C2;}*/
+
+#appMain {position:relative;float:left;display:inline;margin-left:5%;padding-top:12px;width:95%;}
+
+#appMain #tabs {float:left; color:#88B26C; font-weight:bold; margin-left:0;font-size:15px; margin-top:10px; margin-bottom:0; padding-top:0;display:inline;}
+#appMain #tabs li {background-color:#F0FAE0; margin-top:5px; margin-right:1px; width:130px; display:block; list-style-type:none; position:relative; text-align:center; float:left;border-top:1px solid #E1E9D1;border-left:1px solid #CFD7C1;border-right:1px solid #E1E9D1;border-bottom:1px solid #D6E2E2;}
+#appMain #tabs .leftCorner {position:relative;float:left;background:url(/core/views/common/gfx/apps/tabCornerLeft.gif) no-repeat; width:6px; height:6px; float:left;margin-top:-1px;margin-left:-1px;}
+#appMain #tabs .rightCorner {position:relative;float:right;background:url(/core/views/common/gfx/apps/tabCornerRight.gif) no-repeat top right; width:6px; height:6px; float:right;margin-top:-1px;margin-right:-1px;}
+
+#appMain #tabs li.selectedTab {background:#FFF !important; margin-top:0;border:1px solid #B8C6AF;border-left:1px solid #D2DCCA;border-bottom:1px dashed #D6E2E2;}
+#appMain #tabs li.selectedTab .bottomBorder {background:url(/core/views/common/gfx/apps/tabBorderBottom-Select.gif) repeat-x bottom;}
+#appMain #tabs li.selectedTab .leftCorner {background:url(/core/views/common/gfx/apps/tabCornerLeft-Select.gif) no-repeat;height:6px;}
+#appMain #tabs li.selectedTab .rightCorner {background:url(/core/views/common/gfx/apps/tabCornerRight-Select.gif) no-repeat top right;}
+#appMain .tabText {position:relative;float:left;margin:0;padding-top:2px;padding-bottom:5px;padding-left:7px;padding-right:7px; width:114px;}
+#appMain .tabText a {color:#88B26C !important; text-decoration:none !important; display:block;}
+#appMain #tabs li.selectedTab .tabText {padding-top:7px;}
+#appMain #tabs li:hover, #appMain #tabs li.over	{ background-color:#EFFFD0 !important; color:#7EC859; }
+#appMain #tabs li.selectedTab:hover, #appMain #tabs li.over .selectedTab	{	background-color:#FFF !important; color:#88B26C; }
+
+#appContent {width:95%; padding-left:4%;float:left;}
+
+#appMainNav {
+	position:relative;
+	float:left;
+	color:#BACFCF;
+	font-size:16px;
+	font-weight:bold;
+	margin-top:0;
+	margin-bottom:15px;
+	padding-top:20px;
+	padding-bottom:7px;
+	display:inline;
+	border-top:1px dashed #D6E2E2;
+	background:url(/core/views/common/gfx/apps/appHeaderFadeBG.gif) repeat-x;
+	width:100%;
+	}
+#appMainNav.noSubNav {margin-bottom:0px;}
+#appMainNav.withTabs {margin-top:-1px;border-top:1px solid #D6E2E2;}
+#appMainNav a, #appMainNav a:visited {color:#006699; text-decoration:none;}
+th.selectItem, .tableHeader1.selectItem {color:#006699 !important;}
+#appMainNav li {list-style-type:none; background:url(/core/views/common/gfx/apps/subNavBullet.gif) no-repeat left center; float:left; margin-right:25px; padding-left:8px;margin-bottom:10px;}
+#appMainNav li.selected {background:none; padding-left:0;}
+#appMainNav ul li.selected, #appMainNav ul li.selected a {color:#BACFCF !important; text-decoration:none;}
+#appMainNav ul {margin-left:12px;}
+#appMainNav li.selected a:hover {color:#00CCFF !important;}
+#appMainNav li.noBullet {background:none;padding-left:0;}
+
+.verticalNav {margin-top:44px;padding-left:20px;}
+.verticalNav li {list-style-type:none; background:url(/core/views/common/gfx/apps/subNavBullet.gif) no-repeat left 3px; float:left; margin-right:25px; padding-left:8px;margin-bottom:10px;font-weight:bold;color:#5a5f61;margin-bottom:20px;}
+.verticalNav a, #appMainNav a:visited {color:#006699; text-decoration:none;}
+.verticalNav li.selected {background:none; padding-left:0;}
+.verticalNav ul li.selected, #appMainNav ul li.selected a {color:#BACFCF !important; text-decoration:none;}
+li.list-style-none {list-style-type: none;}
+
+#appMainNav #howToLink {float:right; margin-right:10px; margin-top:-14px;margin-bottom:7px;}
+
+ul.asterix li {list-style:url(/core/views/common/gfx/apps/asterix.gif) inside;padding-top:2px;padding-bottom:2px;}
+ul.asterix {margin-left:15px;}
+ul.asterix li ul li {list-style:url(/core/views/common/gfx/apps/bullet_dash.gif) inside;padding-left:18px;padding-top:2px;padding-bottom:2px;}
+ul.arrows {margin:0;padding:0;}
+ul.arrows li {margin:0;padding:0;margin-left:17px;list-style:url(/core/views/common/gfx/apps/bullet_arrows.gif);}
+
+/*#appMain h1 {font-size:20px; color:#425A5D; clear:both;margin-top:0;margin-bottom:5px;}
+#appMain h1 span.currentLevel {color:#425A5D;}
+#appMain h1 span.oneLevelBack {color:#5D8086;}
+#appMain h1 span.twoLevelsBack {color:#89A4A7;}
+#appMain h2 {font-size:18px;color:#425A5D;}
+#appMain h3 {font-size:16px;color:#5D8086;}*/
+
+#appMain th {padding:8px; padding-bottom:5px;padding-top:5px;}
+#appMain .tableHeader1 {padding-bottom:5px;padding-top:5px;text-align:center;}
+#appMain .standardTable, #appMain .tableShaded, #appMain .brokenTable { /*position:relative;*/ float:left; border:1px solid #799297; color:#000;}
+#appMain .tableShaded {background:#F2F8FD;}
+#appMain .tableShaded h1 { font-size:19px; }
+#appMain .shadedArea {background:#F2F8FD; border:1px solid #EFEFEF;}
+#appMain .tableShadedDark {background:#E4EFEB;}
+#appMain td.tableShadedDark {border-bottom:1px solid #CCD7D3;}
+#appMain .lightBorder {border:1px solid #BBC8C5;}
+#appMain .tableShaded.notice {margin-left: 25%; margin-right: 25%; width:50%;}
+#appMain .tableShaded.notice .noticeText{padding:15px;text-align:center;}
+#appMain .notice { color:#4C7977; font-weight:bold; display:block; }
+#appMain .highlight { background:#EEF9F4; }
+#appMain div.tableHeaderRow, div.tableHeader1, div.tableTopRow	{position:relative;float:left;width:100%;}
+#appMain div.tableHeaderRow, #appMain table th {border-bottom:1px solid #D8E2E0;}
+/*.tableHeader1, #appMain table th, .tableTopRow, .verticalTableHeader, #appMain div.tableHeaderRow { background:#DDE9E5; color:#4C7977; font-weight:bold;}*/
+.tableShaded .tableHeader1, .tableShadedDark .tableHeader1 {background:#D1DCDA; color:#6A7A77; border-bottom:1px solid #C9D7D2;}
+.selectItem.verticalTableHeader {color:#006699;}
+.standardTable tr.tableTopRow td, .tableTopRow {border-bottom:none;padding:0;margin:0;}
+.tableHeader2, #appMain table th.tableHeader2, #appMain table td.tableHeader2 { background:#EAF3F1; color:#A0B8BA; padding-top:5px; padding-bottom:5px; position:relative;float:left;font-weight:bold;text-align:center;width:100%;}
+#appMain table th.tableHeader2, #appMain table td.tableHeader2 {float:none;width:auto;}
+#appMain div.tableRow {border-bottom:1px solid #EFEFEF;width:100%;}
+#appMain div.tableCell {position:relative;float:left;padding-top:8px;padding-bottom:5px;}
+#appMain .tableCellBorderLeft {border-left:1px solid #D8E2E0;}
+#appMain .tableCellBorderRight {border-right:1px solid #D8E2E0;}
+#appMain th.tableCellBorderLeft {border-left:1px solid #CAD3D1;}
+#appMain th.tableCellBorderRight {border-right:1px solid #CAD3D1;}
+#appMain .brokenTable { margin-top:2px; }
+#appMain .brokenTable th {padding-top:5px;}
+#appMain .borderTop, #appMain .borderTop td {border-top:1px solid #EFEFEF;}
+#appMain .borderBottomLight {border-bottom:1px solid #D8E2E0;}
+#appMain .borderTopLight {border-top:1px solid #D8E2E0;}
+#appMain .borderLeftDark {border-left:1px solid #799297;}
+#appMain .borderRightDark {border-right:1px solid #799297;}
+#appMain table tr.tableBottomRow td {padding:0;border:0;vertical-align:bottom;}
+#appMain .extraPadding, #appMain .extraPadding td {padding-top:20px;padding-bottom:20px;}
+
+.iconNavigation {position:relative;float:left; width:100%; margin-top:0;height:56px; vertical-align:top; text-align:center;}
+.iconNavItem {position:relative; float:left; width:13%;}
+.iconNavItem img {vertical-align:top;}
+.iconNavigation .selected {background:#edf7fc;height:56px;}
+.iconNavItem a {height: 54px; display: block;}
+#btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8 {background-image:url(/core/views/common/gfx/apps/QGsprite.png);height:54px;}
+#btn1:hover, #btn2:hover, #btn3:hover, #btn4:hover, #btn5:hover, #btn6:hover, #btn7:hover, #btn8:hover {cursor:pointer;}/* FOR IE */
+#btn1 {background-position:-84px -5px; width:52px; margin-top:1px;}
+#btn2 {background-position:-261px -5px; width:39px;}
+#btn3 {background-position:-427px -5px; width:46px;}
+#btn4 {background-position:-593px -5px; width:54px;}
+#btn5 {background-position:-758px -5px; width:65px;}
+#btn6 {background-position:-924px -5px; width:72px;}
+#btn7 {background-position:-1097px -5px; width:67px;}
+#btn8 {background-position:-1271px -5px; width:60px;}
+.QG-btn-divider {float:left;width:1px;height:56px;background-color:#D9EDF7;}
+
+.selectList {background:#FFF;}
+.scrollList {height:370px;overflow:scroll;width:100%;}
+.standardTable td, .selectList .selectListRow {clear:both; padding-left:10px; padding-right:10px; padding-top:8px;padding-bottom:5px;border-bottom:1px solid #EFEFEF;}
+.noBottomBorder, .noBottomBorder td {border-bottom:0px !important;}
+.submitRow, .submitRow td {background:#F2F6F5;border-top:1px dashed #D6E2E2;}
+.shadedArea .submitRow, .shadedArea .submitRow td, .tableShaded .submitRow, .tableShaded .submitRow td {background:#D1DCDA;border-top:1px dashed #ACBCBA;}
+.spacerRow td {font-size:1px;border-bottom:0;}
+.selectItem:hover, .over {cursor:pointer;background:#E7FEFE;}
+.selectItem {color:#006699;}
+th.selectItem:hover, .selectItem.verticalTableHeader:hover {cursor:pointer;background:#E8F8F2 !important;}
+td.categoryItem, div.categoryItem {padding-left:30px;}
+.categoryHeader {color:#999;background:#F4F8F0;font-style:italic;}
+
+#appMain .shadedRow { background:#F4F8F0; }
+#appMain .shadedRowDark, #appMain .shadedRow .tableShadedDark {background:#D8E4E0;}
+
+/**** Use these corners for shaded tables ****/
+#appMain .tableCornerTopLeft {background:url(/core/views/common/gfx/apps/tableCornerHeaderLeft.gif) no-repeat !important; margin-left:-1px; margin-top:-1px !important;float:left; height:6px; width:6px; position:relative;font-size:1px;}/* Give it a tiny font size to make IE behave */
+#appMain .tableCornerTopRight {background:url(/core/views/common/gfx/apps/tableCornerHeaderRight.gif) no-repeat top right; margin-right:-1px; margin-top:-1px !important;float:right; height:6px; width:6px; position:relative;font-size:1px;}/* Give it a tiny font size to make IE behave */
+#appMain .tableCornerBottomLeft {background:url(/core/views/common/gfx/apps/tableCornerBottomLeft.gif) no-repeat bottom left; margin-left:-1px; margin-bottom:-1px; height:6px;width:6px;position:relative;float:left;display:inline;font-size:1px;}
+#appMain .tableCornerBottomRight {background:url(/core/views/common/gfx/apps/tableCornerBottomRight.gif) no-repeat bottom right; margin-right:-1px; margin-bottom:-1px; height:6px;width:6px;position:relative;float:right;display:inline;font-size:1px;}
+/* Allow another pixel for "shadedArea" which has a 1px border */
+.shadedArea .tableCornerTopLeft {margin-top:-2px !important;margin-left:-2px !important;}
+.shadedArea .tableCornerTopRight {margin-top:-2px !important;margin-right:-2px !important;}
+.shadedArea .tableCornerBottomLeft {margin-bottom:-2px !important;margin-left:-2px !important;}
+.shadedArea .tableCornerBottomRight {margin-bottom:-2px !important;margin-right:-2px !important;}
+
+/**** Use these corners gray dotted line fly-outs ****/
+#appMain .cornerTLgray{background:url(/core/views/common/gfx/corner_gray_tl.gif) no-repeat left top;float:left;margin-left:-1px;margin-top:-1px;}
+#appMain .cornerTRgray{background:url(/core/views/common/gfx/corner_gray_tr.gif) no-repeat right top;float:right;margin-right:-1px;margin-top:-1px;}
+#appMain .cornerBLgray{background:url(/core/views/common/gfx/corner_gray_bl.gif) no-repeat left bottom;float:left;margin-left:-1px;margin-bottom:-1px;}
+#appMain .cornerBRgray{background:url(/core/views/common/gfx/corner_gray_br.gif) no-repeat right bottom;float:right;margin-right:-1px;margin-bottom:-1px;}
+#appMain .cornerTLgray,.cornerTRgray,.cornerBLgray,.cornerBRgray{position:relative;width:5px;height:5px;}
+
+#appMain .important, #appMain a.important {color:#D3733F !important; font-weight:bold;}
+#appMain a.edit {color:#7DB658 !important; font-weight:bold;}
+#appMain .button {border:1px solid #7397A6;background:#CAE0EA;color:#006699;}
+#appMain .divider {border-top:1px dashed #CCC;float:left;margin-top:20px;margin-bottom:20px;width:100%;}
+#appMain .lightText {color:#A7BDBC !important;}
+
+.showHideDiv {position:relative;float:left;width:100%;margin-top:7px;} /* 'Show/Hide' parent container */
+.hiddenDiv {position:relative;float:left;width:100%;display:none;margin-top:5px;border:1px dashed #CCC;/*background:#F6FAFA;border:1px solid #E4EDED;*/} /* div that actually appears/disappears */
+.hiddenDiv.attachToTable {background:none;border:1px dashed #CCC;}
+.hiddenDiv p {margin-left:15px;margin-right:15px;}
+.hiddenDivCornerBL{position:relative;float:left;background:url(/core/views/common/gfx/apps/corner_gray_bl.gif) no-repeat left bottom;float:left;margin-left:-1px;margin-bottom:-1px;width:6px;height:6px;}
+.hiddenDivCornerBR{position:relative;float:right;background:url(/core/views/common/gfx/apps/corner_gray_br.gif) no-repeat right bottom;float:right;margin-right:-1px;margin-bottom:-1px;width:6px;height:6px;}
+.paddedText{padding:15px !important;}
+li.action, li.actionNoIndent { background:url(/core/views/common/gfx/apps/bullet_arrows.gif) no-repeat left; list-style:none; padding-left:12px; padding-bottom:4px; margin:0px; }
+li.actionNoIndent { margin-left:-18px; }
+
+.cursorHand {cursor:pointer;}
+
+#appMain .callout {border:1px solid #CADEDD;background:#E0F6EC;padding:10px;}
+
+#appMain .systemMsg {color:#0089E1; font-weight:bold; border:1px dashed #91D3E9; width:92%; margin-bottom:25px; padding-left:4%; padding-right:4%; padding-top:15px; padding-bottom:15px; display:block;}
+#appMain .errorMsg {color:#CB6400; font-weight:bold; border:1px dashed #EFBA79; width:92%; margin-bottom:25px; padding-left:4%; padding-right:4%; padding-top:15px; padding-bottom:15px; display:block;}
+
+.clearFloat {clear:both; height:0; margin:0; font-size:1px; line-height:0;}
+
+
+
+/* NEWS AGGREGATOR */
+#feedContentItem {width:70%;}
+
+
+/*
+	ded-courseStyles.css
+*/
+
+/*body {font-family: "proxima-nova", verdana, tahoma, arial, sans-serif; font-size: 14px; margin:0; padding:0;}*/
+
+.small strong, .small b, .dedreallysmalltext strong, .dedreallysmalltext b, .small text-center strong, .small text-center b,
+.dedreallysmalltext strong, .dedreallysmalltext b, .small text-right strong, .small text-right b, .small text-center strong, .small text-center b,
+.dedcourseinfoboxtext strong, .dedcourseinfoboxtext b, .dedFormButton strong, .dedFormButton b, .dedFormButton:hover strong, .dedFormButton:hover b
+{font-weight:600;}
+
+
+.triangle-left { width:25px; border-top: 16px solid #212138; border-right: 20px solid #46475a; border-bottom: 16px solid #212138; margin-top:-9px; margin-bottom:-5px; float:left; }
+#termAndAY {float:right; margin:-5px 0 -5px 10px; padding:8px 10px 5px 0; background:#46475a;	color:#EDEDED;}
+.circle {
+	float:left;
+	 width: 24px;
+	 height: 24px;
+	 background: #212138;
+	 -moz-border-radius: 12px;
+	 -webkit-border-radius: 12px;
+	 border-radius: 12px;
+	 margin-right:10px;
+	 margin-top:-4px;
+	 margin-bottom:-2px;
+	 padding:4px;
+}
+.nav-bar-header h2 small {color:#EDEDED !important;}
+#courseName h2 {float:left;}
+#courseName h2 small {float:left;padding-top:3px;}
+
+
+/*a.submenu { padding:2px; padding-left:5px; padding-right:5px; }
+a.submenu:hover { color:#fff; cursor:pointer;-moz-border-radius:10px; -webkit-border-radius:10px; }*/
+
+A.wr { font-size:10px; color:black; }
+A.wr:hover { color:red; background:white; }
+
+/*h1 {font-size: 26px;}*/
+
+/*#tabrow {float:right; margin-bottom:-39px; width:527px; display:block;}
+#tabrow ul { margin:0; padding:0; list-style:none; } /*	New Stuff Added KIH 11-3-09 */
+/*#tabrow li {
+	float:left;
+	width:101px;
+	background-color:#FFF;
+	color:#000;
+	text-align:center;
+	line-height:10px;
+	margin-right:2px;
+	margin-left:0;
+	border-top:solid #656565 1px;
+	border-left:solid #656565 1px;
+	border-right:solid #656565 1px;
+	border-bottom-width:0;
+	border-bottom-color:transparent;
+	cursor:pointer;
+}
+#tabrow li a {text-decoration:none; width:101px; display:block; }
+#tabrow li .tabBody .replaceBR {display:none;}
+.tabBody {background:url(/core/views/common/gfx/tabFade.png) repeat-x; padding-bottom:5px; }
+.tabTop { background:url(/core/views/common/gfx/tabFadeTop.png) repeat-x; height:5px; width:100%; }
+.leftCorner { width: 5px; height:5px; margin-left:-1px; margin-top:-1px; float:left; }
+.rightCorner { width: 5px; height:5px; margin-right:-1px; margin-top:-1px; float:right; }*/
+
+/*#subMenuContainer { width:527px; height:39px; float:right; clear:left; }
+#subMenuContainer .subMenuFade div {padding-left:5px; padding-top:10px;}
+#subMenuContainer .subMenuFade div+div {padding-right:5px; padding-top:10px;}
+.subMenuFade { background:url(/core/views/common/gfx/subMenuGradient.png) repeat-x; width:100%; height:39px; text-align:left; }
+.subMenuFade p {padding-left:10px; padding-right:10px; color:#666;}
+.subMenuFade a {font-weight:bold; text-decoration:none; color:#000;}
+.subMenuDivider {padding:0 7px 0 7px;}*/
+
+
+#logoutBG {
+	background: none repeat scroll 0 0 #39394B;
+	float: right;
+	margin: -5px 0;
+	padding: 4px 10px;
+}
+
+#overview #banner {min-height:9em;}
+#banner:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+#bannerImage {height:190px; width:16%;text-align:center;margin-bottom:-60px;margin-right:3%;margin-left:-8px;display:inline-block;vertical-align: middle;}
+#bannerImage img {height:190px; width:190px; border: 2px solid #e8e8e8; padding:6px;}
+#bannerTextContainer {width:71%; color:#000; font-weight:100;display:inline-block;vertical-align:middle;margin-top:8px;}
+#bannerCourseTitle {font-size:2.4em; line-height:1.1em; padding-bottom:7px;}
+#bannerSchool {width:100%; font-size:1.65em; padding-top:7px; border-top:1px solid #e8e8e8;}
+@media (min-width: 768px) and (max-width: 992px) {
+	#bannerImage {margin-left:-80px;}
+	#bannerTextContainer {margin-left:80px;width:85%;margin-right:-6%;}
+	#bannerCourseTitle {font-size:2em;}
+	#bannerSchool {font-size:1.4em;}
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+	#bannerImage {margin-left:-18px;}
+	#bannerTextContainer {margin-left:18px;}
+	#bannerCourseTitle {font-size:2.2em;}
+	#bannerSchool {font-size:1.5em;}
+}
+
+/*#leftGradient { position:absolute; height:475px; width:53px; left:0; top:62px;}
+.leftGradientFade { background:url(/core/views/common/gfx/left_grad.png) repeat-x; width:100%; height:475px; }	*/
+
+#pageContent { float:left; margin-left:12%; margin-right:12%; padding-top:10px; width:76%; clear:both; }
+
+/*#userInfoBG { float:left; width:20%; margin-left:53px; }
+#userInfo {
+	width:100%;
+	background-color:#fff;
+	padding:10px;
+	z-index:40; /* Giving parent container of listOfOtherCourses a higher z-index solves IE7 z-index bug */
+	/*}
+#userInfo .cornerTL { float:left; margin-top:-10px;margin-left:-10px;}		*/
+
+#listOfOtherCourses {display:none; position:absolute; background-color:#fff; z-index:40; width:350px; border:2px solid #b2b2b2; border-radius:5px; margin-bottom:20px;} /* list position determined via js */
+#listOfOtherCourses li {list-style:none; margin-left:0; padding-left:25px; padding-right:15px; border-bottom:1px dashed #ccc;}
+#listOfOtherCourses li:last-of-type {border-bottom:none;}
+#listOfOtherCourses li:hover {background-color:#b5dbea;}
+#listOfOtherCourses li a {text-decoration:none; padding-bottom:10px; padding-top:10px; display:block; }
+#listOfOtherCourses ul {padding-left:0;margin-left:0;margin-top:0;margin-bottom:0;}
+
+.dropDownHeader {background-color:#b2b2b2; width:100%; color:#fff; font-weight:bold; padding-top:3px; padding-bottom:2px;}
+.dropDownContent h1 {background:#d5d5d5; color:#5f5f5f; padding:10px 15px; font-size:1em; margin:0; font-weight:bold; border-top:1px solid #a1a1a1;cursor:pointer;}
+.dropDownContent h2 {background:#ebebeb; color:#5f5f5f; padding:10px 15px 10px 25px; font-size:1em; margin:0; margin-top:-1px; font-weight:bold; border-top:1px solid #d5d5d5;cursor:pointer;}
+.dropDownContent h1:hover {background:#ccc;}
+
+#loginContainer {width:620px;}
+.loginDiv {float:left; width:320px;margin-right:40px;}
+
+#otherCoursesBtn {color: #999999;padding: 1px 2px;line-height:1;font-size: 8.5px;margin-top:-2px;}
+#otherCoursesBtn a {background:url(/core/views/common/gfx/icon_dropDownList.gif) no-repeat;width:14px;height:13px;display:inline-block;margin-bottom:-2px;}
+#closeDropDownListIcon {background:url(/core/views/common/gfx/icon_CloseDropDownList.gif) no-repeat;width:19px;height:16px;display:inline-block;}
+
+
+#factoolsButtons {float:right;margin-top:-58px;}
+#factoolsButtons .row {margin-right:0;}
+
+/* My Courses Page */
+.coursesByAY h3 {padding:.2em 7px; border-bottom: 1px solid #e1dfec; border-left: 5px solid #fff;	cursor:pointer;}
+.coursesByAY h3:hover {opacity:.8;}
+.coursesByAY h3 .glyphicon {opacity:.5;}
+h2.openCloseAndSaveStatus .glyphicon, h3.openCloseAndSaveStatus .glyphicon {float:right;width:1em;margin-right:5px;}
+
+
+/* Visitor Home Page */
+#visitorWelcome {width:72%; float:left; padding-right:10px;margin-bottom:20px;}
+#visitorCourseInfo {width:20%; float:right;}
+#visitorImportantNotes {width:72%; float:left; padding-right:10px;}
+
+.small { font-size: 12px;}
+.smallbold { font-size: 12px; /*font-weight: bold;*/ }
+
+
+
+.dedreallysmalltext { font-size: 12px; }
+.dedcourseinfoboxtext { font-size: 12px; padding-left: 4px; padding-right: 4px }
+.dedredtext { color: red; font-weight: bold; }
+.dedgreytext { color: #787878; font-weight: bold; }
+
+.whitetext { color: #fff }
+.redtext { color: red }
+.greytext { color: #787878 }
+.dedoutofcourse { background-color: #3f0; border: white }
+.qmethanimation { background-color: #ff8a88 }
+
+.dedFormButton { border: solid #000000 1px; background-color: #696969; color:#ffffff; font-size: 12px;}
+.dedFormButton:hover { border: solid #000000 1px; background-color: #ffffff; color:#696969; font-size: 12px;}
+
+.clearFloat { clear:both; }
+
+.simpleBox {
+	border: 1px dashed #31353D;
+	padding:4px;
+}
+
+
+
+/*
+* Think Green Banner Styles
+*/
+#altsToPrint {
+	 			background-color: #194c66;
+	 			background-image: url("/core/modules/onlineLibrary/views/images/thinkGreen.gif");
+	 			background-repeat: no-repeat;
+	 			background-position: 35px 7px;	position: relative;
+	 			border: #c4dbdf 1px solid;
+	 			border-bottom: none;
+	 			margin-top: 20px;
+	 			width: 100%;
+	 			float: left;
+	 			cursor: pointer;
+	 	}
+#altsToPrint .topLeftCorner, #altsToPrint .topRightCorner {
+	 			position: relative;
+	 			margin-top: -1px;
+	 			width: 8px;
+	 			height: 8px;
+	 	}
+#altsToPrint .topLeftCorner {
+	 			background: url("/core/modules/onlineLibrary/views/images/thinkGreen_cornerTL.gif") no-repeat left top;
+	 			float: left;
+	 			margin-left: -1px;
+	 			}
+#altsToPrint .topRightCorner {
+	 			background: url("/core/modules/onlineLibrary/views/images/thinkGreen_cornerTR.gif") no-repeat right top;
+	 			float: right;
+	 			margin-right: -1px;
+	 	}
+
+/*
+	monolith-styles.css
+*/
+
+.dashedBox {padding:8px;border:1px dashed #C7C7C7;}
+
+.validationError {border:1px dashed #FFC35E; }
+
+.factoolsBox {
+	padding:8px;
+	/*border:1px dashed #C7C7C7;*/
+	font-weight: bold;
+	font-size:16px;
+	background-color:#848484; }
+
+/* Generic invalid/missing data during bean validation */
+.invalidBeanData {
+	width:80%;
+	padding: 8px;
+	background-color: #ffffcc;
+	border: 1px solid #aa0000;
+	margin-bottom: 12px;
+}
+
+/* Validation Styles for the LiveValidator JavaScript */
+.LV_validation_message{
+	font-weight:bold;
+	margin:0 0 0 5px;
+}
+
+.LV_invalid {
+	color:#CC0000;
+}
+
+.formBox .alert, .LV_invalid {
+	/*float:left;*/
+	width:250px;
+	margin-left:0;
+	margin-bottom:50px;
+	color:#F00;
+	/*padding-left:22px;
+	background:url(/core/views/common/gfx/arrow_alert.gif) 5px no-repeat;
+	NOT USING THE ARROW B/C IT WASN'T ALWAYS LINING UP WITH THE TEXT FIELD*/
+	}
+.LV_invalid_field,
+input.LV_invalid_field:hover,
+input.LV_invalid_field:active,
+textarea.LV_invalid_field:hover,
+textarea.LV_invalid_field:active {
+	border: 1px solid #F00;
+}
+
+.clearFloat {clear:both; height:0; margin:0; font-size:1px; line-height:0;}
+
+#footer {width:100%;clear:both;padding-top:2em;padding-bottom:2em;text-align:center;}
+
+#rsvErrors {background:url(/core/views/common/gfx/cross.png) no-repeat 0 15px; border:1px solid #ff0000; color:#000; padding:4%; padding-top:15px !important; padding-bottom:15px !important; width:96%; margin-bottom:15px; display:none;}
+
+	/* Three column layout */
+	/* column container */
+	.colmask {
+		position:relative;	/* This fixes the IE7 overflow hidden bug */
+		clear:both;
+		float:left;
+		width:100%;			/* width of whole page */
+		overflow:hidden;		/* This chops off any overhanging divs */
+	}
+	/* common column settings */
+	.colright,
+	.colmid,
+	.colleft {
+		float:left;
+		width:100%;			/* width of page */
+		position:relative;
+	}
+	.col1,
+	.col2,
+	.col3 {
+		float:left;
+		position:relative;
+		padding:0 0 1em 0;	/* no left and right padding on columns, we just make them narrower instead
+						only padding top and bottom is included here, make it whatever value you need */
+		overflow:hidden;
+	}
+	/* 3 Column settings */
+	.threecol {
+		background:#fff;	/* right column background colour */
+	}
+	.threecol .colmid {
+		right:25%;			/* width of the right column */
+		background:#fff;	/* center column background colour */
+	}
+	.threecol .colleft {
+		right:60%;			/* width of the middle column */
+		background:#fff;	/* left column background colour */
+	}
+	.threecol .col1 {
+		width:55%;			/* width of center column content (column width minus padding on either side) */
+		left:102%;			/* 100% plus left padding of center column */
+	}
+	.threecol .col2 {
+		width:13%;			/* Width of left column content (column width minus padding on either side) */
+		left:30%;			/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
+	}
+	.threecol .col3 {
+		width:21%;			/* Width of right column content (column width minus padding on either side) */
+		left:95%;			/* Please make note of the brackets here:
+							(100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
+	}
+
+.homeMainCol {float:right; width:71%; margin-right:10%;}
+.homeleftCol {float:left;width:16%;}
+
+
+/* JHU shields for JHED login button - added by CS 11/24/2015 */
+.shield-jhu { background-image: url(/core/views/common/gfx/jhu-shields/university.shield.white.sprite.png); background-repeat: no-repeat; }
+.shield-jhu-xs { width:11px;height:12px;background-position:-5px -5px; margin:1px 2px 0 0; vertical-align: top; }
+.shield-jhu-sm { width:15px;height:16px;background-position:-5px -143px; margin:1px 2px 0 0; vertical-align: top; }
+.shield-jhu-md { width:22px;height:24px;background-position:-156px -5px; margin:2px 4px 0 0; vertical-align: top; }
+.shield-jhu-lg { width:30px;height:32px;background-position:-156px -39px; margin:3px 8px 0 0;	vertical-align: middle; }
+.shield-jhu-xl { width:60px;height:64px;background-position:-196px -5px; margin:4px 6px 0 0;	vertical-align: middle; }
+.shield-jhu-xxl { width:120px;height:128px;background-position:-26px -5px; margin:6px 6px 0 0;	vertical-align: middle; }
+
+#jhedButtonContainer { text-align:center;margin:0 auto 20px auto;position:relative; }
+#cpAlternateLoginContainer { margin:16px auto 0;text-align:center;position:relative; }
+#cpLoginFormContainer .small-jhu { position:relative; margin:0 auto 20px auto; }
+
+/* added by CS on 3/29/2015 for global spinner image */
+.cs-spinner {
+	position:relative;
+	left:0;
+	z-index:98;
+}
+
+#spinnerOverlay {
+	background-color : rgba(0, 0, 0, 0.2);
+	/* background-image:url(/core/views/common/gfx/spinner_antialias.gif); */
+	/* background-position:center; */
+	background-repeat:no-repeat;
+	z-index : 100;
+	position : fixed;
+	left : 0;
+	top : 0;
+	bottom : -10px;
+	right : 0;
+	width : 100%;
+	height : 100%;
+	display : block;
+}
+
+#sideBarNav {
+	padding:6px;
+	margin-bottom:20px;
+	line-height:18px;
+	/*border:1px dashed #4d4d4e;
+	-moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px;*/
+}
+
+#systemNoticeBox {
+	margin-top:12px;
+	margin-bottom:12px;
+	padding:6px;
+	border:2px dashed #ffa500;
+	border-radius:10px;
+	background-color:#fffff2;
+}
+
+#editThisIncludeButton {
+	float:right;
+	margin-top:-12px;
+	padding:4px;
+	color:#fff;
+	font-weight:bold;
+}
+
+#editThisIncludeButton a {
+	color:#fff !important;
+	text-decoration: none;
+}
+
+#editThisIncludeButton a:hover {
+	/*color:#EFEFEF !important;*/
+	color:#FFF !important;
+	text-decoration: none;
+}
+
+#courseCancelledBox {
+	background-color: #ffe2a9;
+	border: 1px solid #ffa544;
+	border-radius: 4px;
+	padding: 15px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+/*
+ * Schedule builder and content.main additional information text
+ */
+.sbAdditionalInfo { font-style:italic; color:#737373; }
+
+
+.axisLabels {
+	font-size: .9em;
+	font-weight: bold;
+	color: #4d4d4e !important;
+}
+ 
+.requiredAsterix {color:#CC0000;font-size:2em;vertical-align:middle;padding:.4em 2px 0 2px;}
+.banner.bannerAY {cursor:pointer;padding: 0.2em 7px;}
+.bannerAY:hover {opacity:.8;}
+
+/* ctl help link/form submit */
+.navbar-inverse .navbar-nav > li > form.ctlHelpRequest {
+	background-color:transparent;
+	position:relative;
+	display: block;
+	cursor:pointer;
+	height: 30px;
+	padding: 5px 10px;
+}
+.navbar-inverse .navbar-nav > li > form.ctlHelpRequest > button.ctlHelpSubmit {
+	background-color:transparent;
+	border:0;
+	color: #000;
+	line-height: 20px;
+	position: relative;
+	text-align: left;
+	text-decoration: none;
+	padding:0;
+	margin:0;
+}
+.navbar-inverse .navbar-nav > li > form.ctlHelpRequest > button.ctlHelpSubmit:hover {
+	color:#FFF;
+}
+.navbar-inverse .navbar-nav > li > form.ctlHelpRequest:hover {
+	outline: dotted 1px black;
+}
+
+.number-circle {
+	border-radius: 50%;
+  padding: 5px 10px;
+  font-size: large;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  text-align: center;
+}
+span.one-circle{
+	padding-right: 11.5px;
+	padding-left: 11.5px;
+}
+.right-triangle{
+  border-color: transparent transparent transparent #808080;
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  position: relative;
+  display: inline-block;
+  top: 2px;
+  height: 0px;
+  width: 0px;
+}
+.active-number {
+  background: #2a5b8e;
+}
+.inactive-number{
+  background: #808080;
+}
+
+/*
+* Lecture Materials Box - Added Apr 2013
+*/
+.matBox {display:table; table-layout:fixed; width:100%; /*border:1px solid #4d4d4e;*/}
+.matBox .header {display: table-header-group; color:#fff; font-weight:bold;}
+.matBox>.header.matBox-row>.cell:nth-of-type(1) {width:36px;}
+.matBox>.header.matBox-row>.cell:nth-of-type(2) {width:auto;}
+.matBox>.header.matBox-row>.cell:nth-of-type(3) {width:42px;}
+.matBox>.header.matBox-row>.cell:nth-of-type(4) {width:32px;}
+.matBox>.header.matBox-row>.cell:nth-of-type(5) {width:90px;}
+.matBox .matBox-row {display:table-row; width:100%;}
+.matBox .cell {display:table-cell; padding:4px; vertical-align:top; }
+.matBox .cell:first-of-type { padding-left: 15px;}
+.matBox .cell.done .glyphicon {display:inline-block;}
+.matBox .cell.notdone .glyphicon {display:none;}
+.matBox .cell.notdone {padding:0;}
+.matBox .download, .matBox .play {text-align:center; vertical-align:middle; background-color:#ddd;}
+.matBox .download a, .matBox .play a{text-decoration:none !important; float:left;}
+.matBox .download {text-align:left;}
+
+.matBox .download img {padding:0px 2px;}
+.matBox .download .emptyCell {width:5px; float:left;}
+.matBox .play {border-right:3px solid #cacaca;}
+.block1, .block2 {display:inline-block;vertical-align:middle;}
+.block1 {width:100%;margin-right:-25px;}
+.block2 {margin-right:2px;}
+.panel-group .block2 {margin-top:24px;}
+a img {border:0;}
+
+@media screen and (max-width: 1207px){
+	.matBox .matBox-row .cell>div+div {width:100% !important;}
+}
+@media screen and (max-width: 714px){
+	.matBox>.header.matBox-row>.cell:nth-of-type(4) {width:62px;}
+}
+
+/* Attendance Tracker button for home page */
+#attendanceBtnContainer {display: none;}
+
+/* compensates for missing .alert.alert-default class in Bootstrap 3 */
+.alert.alert-default {
+	background-color: #fafafa;
+	border-color: #cccccc;
+}
+.ui-state-default .ui-icon.ui-icon-white {
+	background-image: url("images/ui-icons_FFFFFF_256x240.png");
+}
+.ui-state-default .ui-icon.ui-icon-black {
+	background-image: url("images/ui-icons_000000_256x240.png");
+}
+
+/* ol file table */
+.ol-library-content .table.table-striped.ol-view-table-striped>tbody>tr:nth-child(odd)>td {
+	background-color:#fafafa;
+}
+.ol-library-content .table.table-striped.ol-view-table-striped>tbody>tr:nth-child(even)>td {
+	background-color:#ededed;
+}
+.ol-library-content .ol-view-table{
+	margin:0 auto;
+	padding:0;
+}
+.ol-library-content .ol-view-table th .cs-spinner{
+	position:relative;
+	display:inline-block;
+	margin-left:8px;
+}
+.ol-library-content .ol-folder-title {
+	font-weight:bold;
+}
+.ol-library-content .ol-folder-title.ol-folder-subtle {
+	font-style:italic;
+	color:#999;
+}
+.ol-library-content .ol-folder-title.ol-folder-subtle::after{
+	content: " (empty)";
+	color:#999;
+	font-style:italic;
+}
+
+/* error handler properties */
+#errorBox {
+	position:relative;
+	text-align:left;
+	width: 100%;
+	padding:6px;
+	display:table;
+}
+.exceptionPage #errorBox {
+	border:4px dotted #ffa500;
+	-moz-border-radius:10px; -webkit-border-radius:10px; border-radius:10px;
+}
+.exceptionPage #errorBox .exceptionDump h2,
+.exceptionPage #errorBox .exceptionDump h4,
+.exceptionPage #errorBox .exceptionDump h3 {
+	font-size:1.0em;
+	color:#000;
+}
+.exceptionPage #errorBox h1,
+.exceptionPage #errorBox h2,
+.exceptionPage #errorBox h3,
+.exceptionPage #errorBox h4,
+.exceptionPage #errorBox h5,
+.exceptionPage #errorBox h6 {
+	color:#000;
+}
+#errorBox .ml-form,#errorBox .ml-cfdump-table { display:table; margin:20px auto; position:relative; width:95%;min-width:80%; }
+#errorBox .ml-cfdump-table .cfdump_struct,
+#errorBox .ml-cfdump-table .cfdump_array,
+#errorBox .ml-cfdump-table .cfdump_query,
+#errorBox .ml-cfdump-table .cfdump_object{
+	display:table;
+	position:relative;
+	width:100%;
+}
+#errorBox .ml-cfdump-table tr { position:relative; max-width:100%; }
+#errorBox .ml-cfdump-table td {
+	overflow-wrap: break-word;
+	word-break: break-word;
+	-ms-word-break: break-all;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+#errorBox .ml-cfdump-table td.struct,.ml-cfdump-table td.array,.ml-cfdump-table td.object { width:12%; position:relative; }
+#errorBox .ml-cfdump-table td.query { width:5%; position:relative; }
+#errorBox .ml-cfdump-table td:not(.struct):not(.array):not(.query):not(.object) { width:88%; position:relative; }
+#errorBox .ml-cfdump-table .cfdump_query td:not(.query),
+#errorBox .ml-cfdump-table .cfdump_object td:not(.object) { width:auto !important; position:relative; }
+#errorBox .cst-controllers { position:fixed; top:2px; right:20px; z-index:100; }
+#errorBox .row.exceptionRow {
+	margin-bottom:20px;
+}
+.ml-err-ftr,.ml-err-hdr { margin:20px auto; position:relative; }
+
+/* for use of bootstrap icons - bypasses when button has class of glyphicon - Saturday, 10/08/2016 09:12:26 AM CS */
+.ui-icon.glyphicon {
+	text-indent: initial;
+}
+
+.disabled-link{
+	pointer-events: none !important;
+}
+
+.not-allowed{
+	cursor:not-allowed !important;
+}
+
+.input-group-addon.primary {
+	color: rgb(255, 255, 255);
+	background-color: rgb(50, 118, 177);
+	border-color: rgb(40, 94, 142);
+}
+.input-group-addon.success {
+	color: rgb(255, 255, 255);
+	background-color: rgb(92, 184, 92);
+	border-color: rgb(76, 174, 76);
+}
+.input-group-addon.info {
+	color: rgb(255, 255, 255);
+	background-color: rgb(57, 179, 215);
+	border-color: rgb(38, 154, 188);
+}
+.input-group-addon.warning {
+	color: rgb(255, 255, 255);
+	background-color: rgb(240, 173, 78);
+	border-color: rgb(238, 162, 54);
+}
+.input-group-addon.danger {
+	color: rgb(255, 255, 255);
+	background-color: rgb(217, 83, 79);
+	border-color: rgb(212, 63, 58);
+}
+
+/* border status indicators */
+.cp-highlighted-item-success {
+	border-color: #2b542c !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 12px #67b168 !important;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 12px #67b168 !important;
+}
+.cp-highlighted-item-success .cp-highlighted-content {
+	background-color: #dff0d8 !important;
+}
+
+.cp-highlighted-item-failure {
+	border-color: #843534 !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 12px #ce8483 !important;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 12px #ce8483 !important;
+}
+.cp-highlighted-item-failure .cp-highlighted-content {
+	background-color: #f2dede !important;
+}
+
+.cp-highlighted-item-info {
+	border-color: rgba(82,168,236,.8) !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 12px rgba(82,168,236,.8) !important;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 12px rgba(82,168,236,.8) !important;
+}
+
+.cp-shadowed-border{
+	border: 1px solid hsl(219, 1%, 72%) !important;
+    border-radius: 0.2em !important;
+    box-shadow: 0 0 0.2em hsl(219, 1%, 72%) !important;
+    background: hsl(220, 43%, 99%) !important;
+}
+
+/* glyphicon spinners - CS Friday, 10/21/2016 08:27:10 AM */
+.glyphicon.fast-right-spinner {
+	-webkit-animation: glyphicon-spin-r 1s infinite linear;
+	animation: glyphicon-spin-r 1s infinite linear;
+}
+
+.glyphicon.normal-right-spinner {
+	-webkit-animation: glyphicon-spin-r 2s infinite linear;
+	animation: glyphicon-spin-r 2s infinite linear;
+}
+
+.glyphicon.slow-right-spinner {
+	-webkit-animation: glyphicon-spin-r 3s infinite linear;
+	animation: glyphicon-spin-r 3s infinite linear;
+}
+
+.glyphicon.fast-left-spinner {
+	-webkit-animation: glyphicon-spin-l 1s infinite linear;
+	animation: glyphicon-spin-l 1s infinite linear;
+}
+
+.glyphicon.normal-left-spinner {
+	-webkit-animation: glyphicon-spin-l 2s infinite linear;
+	animation: glyphicon-spin-l 2s infinite linear;
+}
+
+@-webkit-keyframes glyphicon-spin-r {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+}
+
+@keyframes glyphicon-spin-r {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+}
+
+@-webkit-keyframes glyphicon-spin-l {
+	0% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+}
+
+@keyframes glyphicon-spin-l {
+	0% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+}

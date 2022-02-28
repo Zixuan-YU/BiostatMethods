@@ -1,0 +1,1124 @@
+//This script will install related javascript frameworks to the monolith.
+//Created 09/21/09 - cnc
+
+
+ctltScript.defaultScriptLocation = "/core/views/common/javascripts/";
+ctltScript.fontLocation = "//use.typekit.com/pkl0sni.js";
+ctltScript.definedServers = [
+	'localhost',
+	'courseplus.jhu.edu',
+	'courseplus.jhsph.edu',
+	'distance.jhsph.edu'
+];
+
+//
+//mathJax locations:
+//
+//cdn
+//     "//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML";
+//defaultVer (need to have mathjax folder locally to work.  currently unavail due to size of mathJax lib)
+//     ctltScript.defaultScriptLocation+'mathJax/'+ctltScript.defaultVersions.mathJax+'/MathJax.js?config=TeX-AMS_HTML";
+
+ctltScript.mathJaxLocation = "//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS_HTML";
+ctltScript.ckeditorLocation = "//cdn.ckeditor.com/";
+
+
+ctltScript.defaultVersions = {
+	jquery: "3.6.0",
+	bootstrap: "3.3.5",
+	bootstraptable: "1.18.0",
+	jqueryui: "1.12.1",
+	swfobject: "2.2",
+	jscal: "1.0.0",
+	ckeditor: "4.16.1",
+	moment: "2.2.1",
+	tabber: "sep09",
+	tipped: "3.1.8",
+	jqueryvalidate: "1.17.0",
+	highCharts : "8.1.1",
+	chosenDropDown: "1.1.0",
+	dateTimePicker: "2.2.5",
+	jqueryUITouchPunch: "feb14",
+	mathJax: "2.7.3",
+	jqueryForm: "3.51",
+	pagination: "2.1.0"
+}
+ctltScript.loadExtraPlugin = function (name, dir, ver, loc) {     //this will add plug-ins
+	var whereIsScript = loc + dir + "/" + ver + "/" + name + ".js";
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+};
+
+ctltScript.loadjQuery = function (ver) {
+	var whereIsScript = '//cdnjs.cloudflare.com/ajax/libs/jquery/' + ver + '/jquery.min.js';
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+}
+
+ctltScript.loadBootstrap = function (ver) {
+	var whereIsScript = '/core/views/common/bootstrap/' + ver + '/dist/js/bootstrap.min.js';
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+	document.write('<script type="text/javascript" src="/core/views/common/bootstrap-accessibility-plugin-master/plugins/js/bootstrap-accessibility.min.js"></script>');
+}
+
+ctltScript.loadBootstrapTable = function (ver) {
+	var whereIsScriptBase = '//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/' + ver;
+	document.write('<script type="text/javascript" src="' + whereIsScriptBase + '/bootstrap-table.min.js"><\/script>');
+	ctltScript.loadExtraStyle(whereIsScriptBase + '/bootstrap-table.min.css');
+}
+
+ctltScript.loadjQueryUI = function (ver) {
+	var whereIsScript = '//cdnjs.cloudflare.com/ajax/libs/jqueryui/' + ver + '/jquery-ui.min.js';
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+	ctltScript.loadExtraStyle("/core/views/common/css/jquery-ui-1.12.1.custom.css");
+}
+
+ctltScript.loadjqDoubleScroll = function () {
+	var whereIsScript = '/core/views/common/javascripts/jqDoubleScrollPlugin/jquery.doubleScroll.js';
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+}
+
+ctltScript.loadswfObject = function (ver) {
+	var whereIsScript = '//cdnjs.cloudflare.com/ajax/libs/swfobject/' + ver + '/swfobject.js';
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+}
+
+ctltScript.loadTipped = function (ver) {
+	document.write('<script type="text/javascript" src="' + ctltScript.defaultScriptLocation + 'tipped/' + ver + '/js/spinners/spinners.min.js"><\/script>');
+	document.write('<script type="text/javascript" src="' + ctltScript.defaultScriptLocation + 'tipped/' + ver + '/js/tipped/tipped.js"><\/script>');
+	document.write('<script type="text/javascript" src="' + ctltScript.defaultScriptLocation + 'customTippedSkins/skins.js"><\/script>');
+	ctltScript.loadExtraStyle(ctltScript.defaultScriptLocation + 'tipped/' + ctltScript.defaultVersions.tipped + '/css/tipped/tipped.css');
+	ctltScript.loadExtraStyle(ctltScript.defaultScriptLocation + 'customTippedSkins/skins.css');
+}
+
+
+ctltScript.loadjQueryValidate = function (ver) {
+	var whereIsScript = '//cdnjs.cloudflare.com/ajax/libs/jquery-validate/' + ver + '/jquery.validate.min.js';
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+}
+
+ctltScript.loadChosenDropDown = function (ver) {
+	document.write('<script type="text/javascript" src="' + ctltScript.defaultScriptLocation + 'chosenDropDown/' + ver + '/chosen.jquery.min.js"><\/script>');
+	ctltScript.loadExtraStyle(ctltScript.defaultScriptLocation + 'chosenDropDown/' + ctltScript.defaultVersions.chosenDropDown + '/chosen.css');
+}
+
+
+ctltScript.loaddatetimepicker = function () {
+	document.write('<script type="text/javascript" src="' + ctltScript.defaultScriptLocation + 'datetimepicker/jquery.datetimepicker.js"><\/script>');
+	ctltScript.loadExtraStyle(ctltScript.defaultScriptLocation + 'datetimepicker/jquery.datetimepicker.css');
+}
+
+ctltScript.loadExtraStyle = function (location) { document.write('<link type="text/css" href="' + location + '" rel="stylesheet">'); }
+
+ctltScript.loadFont = function () {
+	document.write('<script type="text/javascript" src="' + ctltScript.fontLocation + '"><\/script>');
+	document.write('<script type="text/javascript">try{Typekit.load();}catch(e){}<\/script>');
+}
+
+ctltScript.loadFontExec = function () {
+	try { Typekit.load(); } catch (e) { };
+}
+
+ctltScript.loadMathJax = function (ver) {
+	var whereIsScript = '//cdnjs.cloudflare.com/ajax/libs/mathjax/' + ver + '/MathJax.js?config=TeX-AMS_HTML';
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+}
+
+ctltScript.loadCkEditor = function (ver, loadAdapter) {
+
+	document.write('<script type="text/javascript" src="' + ctltScript.ckeditorLocation + ver + '/full-all/ckeditor.js"><\/script>');
+	if (loadAdapter == 1) {
+		document.write('<script type="text/javascript" src="' + ctltScript.ckeditorLocation + ver + '/full-all/adapters/jquery.js"><\/script>');
+	}
+
+}
+ctltScript.loadJQueryPaginate = function () {
+	var whereIsScript = '/core/views/common/javascripts/jquery-paginate/jquery-paginate-custom.js';
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+	ctltScript.loadExtraStyle(ctltScript.defaultScriptLocation + 'jquery-paginate/jquery-paginate-custom.css');
+}
+
+
+
+ctltScript.loadHighCharts = function (ver, modules) {
+	var whereIsScriptCDN ="//code.highCharts.com/";
+	document.write('<script type="text/javascript" src="'+whereIsScriptCDN+ver+'/highcharts.js"><\/script>');
+    
+	for (idx in ctltScript.highCharts.modules) {
+		document.write('<script type="text/javascript" src="'+whereIsScriptCDN+ver+'/modules/'+ctltScript.highCharts.modules[idx]+'.js"><\/script>');
+	}
+}
+
+ctltScript.jqueryForm = function (ver) {
+	var whereIsScript = '/core/views/common/javascripts/jquery-form/' + ver + '/jquery.form.min.js';
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+}
+
+ctltScript.loadAccessibleTabs = function () {
+	var whereIsScript = ctltScript.defaultScriptLocation+'accessibleTabs/accessibleTabs.js';
+	document.write('<script type="text/javascript" src="' + whereIsScript + '"><\/script>');
+	ctltScript.loadExtraStyle(ctltScript.defaultScriptLocation + 'accessibleTabs/accessibleTabs.css');
+}
+
+/*
+ * to store all jqdialogs to be called by name if necessary
+ * added on 6/13/13 by CFS
+ */
+ctltScript.jqdialogs = new Object;
+
+/*
+ * creates an individual jqdialog
+ * added on 6/13/13 by CFS
+ */
+ctltScript.jqdialog = function (config) {
+	var alertWin = new Object;
+	var dialogBoxProperties = '';
+	var differentiator = Math.floor(Math.random() * 10000000);
+	var configObj = config;
+	var id = ("id" in configObj) ? configObj.id : 'jquiDialog' + differentiator;
+
+	//window properties
+	alertWin.buttons = [];
+	//buttons
+	if (!('customButtons' in config) || config.customButtons <= 0) {
+		alertWin.buttons = [];
+		var okButton = new Object;
+		okButton.text = ("onConfirmText" in configObj) ? configObj.onConfirmText : 'OK';
+		okButton.click = (typeof configObj.onConfirm === 'function') ? function () {
+			configObj.onConfirm();
+			if (typeof ctltScript.jqleaveOpen == 'undefined' || ctltScript.jqleaveOpen !== true) {
+				jQuery(this).dialog('close');
+			}
+		} : function () { jQuery(this).dialog('close'); return true; };
+		if ('onConfirmButtonClass' in configObj) {
+			okButton.class = configObj.onConfirmButtonClass;
+		}
+
+		var cancelButton = new Object;
+		cancelButton.text = ("onCancelText" in configObj) ? configObj.onCancelText : 'Cancel';
+		cancelButton.click = (typeof configObj.onCancel === 'function') ? configObj.onCancel : function () { jQuery(this).dialog('close'); return false; };
+		if ('onCancelButtonClass' in configObj) {
+			cancelButton.class = configObj.onCancelButtonClass;
+		}
+		switch (configObj.type) {
+			case 'confirm':
+				alertWin.buttons.push(okButton);
+				alertWin.buttons.push(cancelButton);
+				break;
+			default:
+				alertWin.buttons.push(okButton);
+				if ("onCancelText" in configObj) alertWin.buttons.push(cancelButton);
+				break;
+		}
+	} else {
+		alertWin.buttons = ('buttons' in configObj) ? configObj.buttons : [];
+	}
+
+	alertWin.closeOnEscape = ("closeOnEscape" in configObj) ? configObj.closeOnEscape : false;
+	alertWin.autoOpen = ("autoOpen" in configObj) ? configObj.autoOpen : false;
+	alertWin.appendTo = ("appendTo" in configObj) ? configObj.appendTo : '';
+	alertWin.dialogClass = ("dialogClass" in configObj) ? configObj.dialogClass : '';
+	alertWin.draggable = ("draggable" in configObj) ? configObj.draggable : true;
+	alertWin.hide = ("hide" in configObj) ? configObj.hide : '';
+	alertWin.show = ("show" in configObj) ? configObj.show : '';
+	alertWin.title = ("title" in configObj) ? configObj.title : 'Attention';
+	alertWin.modal = ("modal" in configObj) ? configObj.modal : false;
+	if ("position" in configObj) {
+		alertWin.position = configObj.position;
+	}
+	alertWin.resizable = ("resizable" in configObj) ? configObj.modal : true;
+	alertWin.width = ("width" in configObj) ? configObj.width : '300';
+	alertWin.height = ("height" in configObj) ? configObj.height : '200';
+	alertWin.minHeight = ("minHeight" in configObj) ? configObj.minHeight : '';
+	alertWin.minWidth = ("minWidth" in configObj) ? configObj.minWidth : '';
+	//if the value of a key is empty, it is not passed to dialog
+	for (var key in alertWin) {
+		var alertObj = alertWin[key];
+		switch (typeof alertObj) {
+			case 'Array':
+				if (alertObj.length <= 0) {
+					delete alertObj;
+				}
+				break;
+			case 'string':
+				if (alertObj == '') {
+					delete alertObj;
+				}
+				break;
+		}
+	}
+	//for any additional params that were not itemized.
+	for (var cob in configObj) {
+		if (typeof alertWin[cob] == 'undefined') {
+			alertWin[cob] = configObj[cob];
+		}
+	}
+
+	//checks to see if the dialog box exists and opens it if it does
+	if (id in ctltScript.jqdialogs) {
+		jQuery(ctltScript.jqdialogs[id]).dialog(alertWin).dialog("open");
+		if ("message" in configObj) {
+			jQuery('#' + id).html(configObj.message);
+		}
+	} else {
+		var newdialog = '<div id="' + id + '"/>';
+		jQuery('body').append(newdialog);
+		if ("message" in configObj) {
+			jQuery('#' + id).html(configObj.message);
+		}
+		var jqdialog = jQuery('#' + id).dialog(alertWin).dialog("open");
+		ctltScript.jqdialogs[id] = jqdialog;
+	}
+
+	//finally, this is a hack, seems that bootstrap and jqueryui don't play along.  this is to renable the x in the closing icon
+	//jQuery('button.ui-dialog-titlebar-close').html('X');
+}
+
+
+/*
+ * ctlPopup is an object that mimics a lightview/darkroom effect
+ *  1/15/2014 created byt bka
+ *  to use
+ */
+ctltScript.loadExtraStyle(ctltScript.defaultScriptLocation + 'ctlpopup/ctlpopup.css');
+
+ctltScript.ctlPopup = {
+	initialized: false,
+	initPopupBox: function () {
+		var popupBoxHTML = '<div id="ctlpopupBoxBG" style="display:none;"></div>' +
+			'<div id="ctlpopupBox" style="display:none;">' +
+			'<div id="ctlpopupBoxHeader">' +
+			'<div id="ctlpopupBoxTitle" style="width:80%; margin:0; float:left;"></div>' +
+			'<div id="ctlpopupBoxHeaderControls" class="ctlpopupBoxHeaderControls"  style="width:20%; margin:0; float:right;">' +
+			'<button class="ctlpopupUIButton" id="ctlhidePopupBoxBoxBtn">X</button>' +
+			'</div>' +
+			'<div class="clearFloat"></div>' +
+			'</div>' +
+			'<div id="ctlpopupBoxContent"><div id="ctlpopupWaitingGifContainer"><img src="/core/views/common/gfx/waitClock.gif" /></div></div>' +
+			'</div>';
+		jQuery(popupBoxHTML).appendTo('body');
+		var popupBoxBG = jQuery('#ctlpopupBoxBG');
+		popupBoxBG.css({
+			opacity: 0.5,
+		});
+		popupBoxBG.on('click', this.togglePopupBox);
+		jQuery('#ctlhidePopupBoxBoxBtn').on('click', this.togglePopupBox);
+		this.initialized = true;
+	},
+
+	togglePopupBox: function () {
+		if (this.initialized == false) this.initPopupBox();
+		var popupBox = jQuery('#ctlpopupBox');
+		var popupBoxBG = jQuery('#ctlpopupBoxBG');
+		var winHeight = jQuery(document).height() + 300;
+		var winWidth = jQuery(window).width();
+		var leftMar = (winWidth - popupBox.width()) / 2;
+		var popUpAndOffset = jQuery(window).scrollTop() + 20 + popupBox.height();
+		if (popUpAndOffset > winHeight) {
+			winHeight = popUpAndOffset + 100;
+		}
+		if (popupBoxBG.is(':hidden')) {
+			//showBox
+			popupBoxBG.css({
+				height: winHeight
+			});
+			popupBox.css({
+				left: leftMar + 'px',
+				top: jQuery(window).scrollTop() + 100 + 'px'
+			});
+
+			popupBoxBG.fadeIn(250);
+			popupBox.show();
+			jQuery(document).keyup(this.closePopupOnEsc);
+
+		} else {
+			//hide box, put object back in parking lot if it came from there
+			popupBox.hide();
+			popupBoxBG.fadeOut(500);
+
+			if (jQuery('#ctlPopupPlaceholder').length) {
+				jQuery('#ctlpopupBoxContent').children().hide().insertBefore(jQuery('#ctlPopupPlaceholder'));
+				jQuery('#ctlPopupPlaceholder').remove();
+			}
+			jQuery('#ctlpopupBoxContent').empty();
+			jQuery(document).unbind('keyup', this.closePopupOnEsc);
+			jQuery('#ctlpopupBoxTitle').empty();
+			jQuery('#ctlpopupBoxContent').html('<div id="ctlpopupWaitingGifContainer"><img src="/core/views/common/gfx/waitClock.gif" /></div>');
+		}
+	},
+
+	closePopupOnEsc: function (e) {
+		if (ctltScript.ctlPopup.initialized == false) ctltScript.ctlPopup.initPopupBox();
+		if (e.keyCode == 27) {
+			ctltScript.ctlPopup.togglePopupBox();
+		}
+	},
+	//     show(opt) function, shortcut to show popup with content
+	//     opt is a hash table {} that has the following keys (all optional);
+	//          id          :          id of element to show
+	//          obj          :          a jquery element/object
+	//          url          :          url to load via jquery.ajax()
+	//          urlOpts     :          options to pass on to ajax()
+	//          width     :          width of popup
+	//          height     :          height of popup
+	//          windowTitle     :          title of window
+	//          rememberLocation:     if content needs to return to its original location when 'esc' or closed.
+	//          callBack          :     a function that loads after show();
+
+	show: function (opt) {
+		if (this.initialized == false) this.initPopupBox();
+		var content;
+		var container = jQuery('#ctlpopupBoxContent');
+		var box = jQuery('#ctlpopupBox');
+		if (container.length == 0) return false;               //ctltpopupbox doesn't exist, abort.
+
+		if (typeof opt === 'object' && opt != null) {
+
+			if (typeof opt.id === 'string') {               //use id if its a string
+				content = jQuery('#' + opt.id);
+				if (content.length) {                         //id is found.
+					if (opt.rememberLocation == true) {
+						jQuery('<div />', {
+							id: 'ctlPopupPlaceholder'
+						}).hide().insertBefore(content);
+					}
+					container.html(content);
+					content.show();
+					this.togglePopupBox();
+				}
+			}                                                       //end if opt.id
+
+			if (typeof opt.url === 'string') {               //use url if its a string
+				this.togglePopupBox();                              //show popup box first;
+				var settings = (typeof opt.urlOpts === 'object' && opt.urlOpts != null) ? opt.urlOpts : { type: 'GET' };     //pass along urlOpts if exists
+				settings.cache = false;
+				jQuery.ajax(opt.url, settings).done(function (data) {
+					container.html(data);
+					if (typeof opt.callBack === 'function') {
+						opt.callBack();
+					}
+				});
+			}
+
+			if (typeof opt.obj === 'object' && opt.obj != null) {     // use obj if exists
+				var content = jQuery(opt.obj.get(0));
+				if (opt.rememberLocation == true) {
+					jQuery('<div />', {
+						id: 'ctlPopupPlaceholder'
+					}).hide().insertBefore(content);
+				}
+				container.html(content);
+				content.show();
+				this.togglePopupBox();
+			}
+
+
+			//if height and/or width is defined, overwrite
+
+			if (typeof opt.width === 'string') box.css({ width: opt.width });
+			if (typeof opt.width === 'number') box.css({ width: opt.width + 'px' });
+
+
+			// if title is defined, write it.
+			if (typeof opt.windowTitle === 'string') jQuery('#ctlpopupBoxTitle').html('<h2>' + opt.windowTitle + '</h2>');
+
+			/*
+			 *
+			 *
+			 * if(typeof opt.height === 'string') box.css({height: opt.height});
+				if(typeof opt.height === 'number') box.css({height: opt.height+'px'});
+
+			*/
+			//if dimension changed, recenter
+			if (typeof opt.width === 'string' | typeof opt.width === 'number') {
+				var winHeight = jQuery(document).height() + 300;
+				var winWidth = jQuery(window).width();
+				var leftMar = (winWidth - box.width()) / 2;
+				box.css({
+					left: leftMar + 'px',
+				});
+			}
+
+
+		}     //end if opt is an object
+	},
+	hide: function () {
+		if (this.initialized == false) this.initPopupBox();
+		var popupBox = jQuery('#ctlpopupBox');
+		var popupBoxBG = jQuery('#ctlpopupBoxBG');
+		popupBox.hide();
+		popupBoxBG.fadeOut(500);
+		if (jQuery('#ctlPopupPlaceholder').length) {
+			var returnObj = jQuery(jQuery('#ctlpopupBoxContent').html());
+			jQuery('#ctlPopupPlaceholder').replaceWith(returnObj);
+			returnObj.hide();
+		}
+		jQuery('#ctlpopupBoxContent').empty();
+		jQuery(document).unbind('keyup', this.closePopupOnEsc);
+		jQuery('#ctlpopupBoxTitle').empty();
+		jQuery('#ctlpopupBoxContent').html('<div id="ctlpopupWaitingGifContainer"><img src="/core/views/common/gfx/waitClock.gif" /></div>');
+	}
+}
+
+ctltScript.initiateDownloadInIframe = function (p) {
+	var defer = new jQuery.Deferred();
+	var anchorObj = (typeof p != 'undefined' && 'anchor' in p) ? jQuery(p.anchor) : jQuery('body');
+	var anchorObjID = (typeof jQuery(anchorObj).attr('id') != 'undefined') ? jQuery(anchorObj).attr('id') : ('id' in p) ? p.id : 'iframe';
+	if (typeof p != 'undefined' && 'data' in p) {
+		var iframe = jQuery.parseHTML('<iframe name="' + anchorObjID + new Date().getTime() + '" id="' + anchorObjID + new Date().getTime() + '" src="#"/>');
+		//console.log(iframe);
+		jQuery(anchorObj).append(iframe);
+		jQuery(iframe).attr({
+			src: ('redirectTo' in p.data) ? window.location.protocol + p.data.redirectTo : ('REDIRECTTO' in p.data) ? window.location.protocol + p.data.REDIRECTTO : '#',
+			style: 'visibility:hidden;display:none;'
+		});
+		jQuery(iframe).on('load', function (event) {
+			defer.resolve(true);
+		});
+	} else {
+		defer.resolve(false);
+	}
+	return defer.promise();
+}
+
+ctltScript.dialog = function (config) {
+	var differentiator = Math.floor(Math.random() * 10000000);
+	var alertWin = document.createElement("div");
+	alertWin.style["width"] = (config.width) ? config.width + 'px' : '300px';
+	alertWin.style["display"] = "none";
+	alertWin.id = (config.id) ? config.id + differentiator : "defaultAlertWin" + differentiator;
+	var messageContainer = document.createElement("div");
+	messageContainer.innerHTML = config.message;
+	alertWin.appendChild(messageContainer);
+	var buttonsContainer = document.createElement("div");
+	buttonsContainer.style.textAlign = "center";
+	//buttonsContainer.style["height"]="35px";
+	if (config.onConfirm != undefined || config.onConfirmText != undefined) {
+		var okButton = document.createElement("input");
+		okButton.type = "button";
+		okButton.value = (config.onConfirmText != undefined) ? config.onConfirmText : "OK";
+		okButton.style["margin"] = "8px";
+		okButton.onclick = function () {
+			if (config.onConfirm != undefined) { config.onConfirm() }
+			Lightview.hide()
+		};
+		buttonsContainer.appendChild(okButton);
+	};
+	var cancelButton = document.createElement("input");
+	cancelButton.type = "button";
+	cancelButton.value = (config.onCancelText != undefined) ? config.onCancelText : "Cancel";
+	// If no onConfirm/Cancel information is passed, this is a simple alert dialog.
+	if (config.onConfirm == undefined && config.onConfirmText == undefined) {
+		cancelButton.value = "OK";
+	}
+	cancelButton.style["margin"] = "8px";
+	cancelButton.onclick = function () {
+		if (config.onCancel != undefined) { config.onCancel() }
+		Lightview.hide()
+	};
+	buttonsContainer.appendChild(cancelButton);
+	alertWin.appendChild(buttonsContainer);
+	document.body.appendChild(alertWin);
+	if (Lightview) { Lightview.show('#' + alertWin.id); }
+	document.observe('lightview:loaded', function () { Lightview.show(alertWin.id) });
+
+};
+
+//end ctltScript.dialog
+
+/*
+ * addSpinner and removeSpinner will add/remove a spinner to/from a parent object
+ */
+
+ctltScript.spinnerExclusions = [];
+ctltScript.spinningInProgress = 0;
+
+ctltScript.addSpinner = function (obj) {
+	ctltScript.spinningInProgress = 1;
+	var location = (typeof obj != 'undefined') ? obj : 'body';
+	var existingSpinners = jQuery(location).find('.cs-spinner');
+	var spinner = new Object;
+	spinner.img = (typeof jQuery(obj).attr('data-spinner') != 'undefined') ? jQuery(obj).attr('data-spinner') : "/core/views/common/gfx/spinner_antialias.gif";
+	spinner.height = (typeof jQuery(obj).attr('data-spinner-height') != 'undefined') ? jQuery(obj).attr('data-spinner-height') : 16;
+	spinner.width = (typeof jQuery(obj).attr('data-spinner-width') != 'undefined') ? jQuery(obj).attr('data-spinner-width') : 16;
+	spinner.htmlContent = '<span class="cs-spinner"><img width="' + spinner.width + '" height="' + spinner.height + '" src="' + spinner.img + '" /></span>';
+	spinner.parsedContent = jQuery.parseHTML(spinner.htmlContent);
+	//console.log( jQuery('body').find(':enabled').length );
+	//console.log( jQuery(existingSpinners).length );
+
+	if (jQuery(existingSpinners).length <= 0 || jQuery('body').find(':enabled')) {
+		if (jQuery('body').find('#spinnerOverlay').length === 0) {
+			jQuery('body').append('<div id="spinnerOverlay"></div>');
+		}
+		if (jQuery(existingSpinners).length <= 0) {
+			jQuery(location).append(spinner.htmlContent);
+		}
+		if (jQuery('body').find(':enabled')) {
+			jQuery('body').find(':enabled').each(function (ik, iv) {
+				spinner.splitClasses = (typeof jQuery(iv).attr('class') != 'undefined' && jQuery(iv).attr('class') != '') ? jQuery(iv).attr('class').split(/\s+/) : [];
+				jQuery.each(spinner.splitClasses, function (ikc, ivc) {
+					if (ctltScript.spinnerExclusions.indexOf(ivc) < 0) {
+						jQuery(iv).prop('disabled', true);
+					}
+				});
+			});
+		}
+	}
+}
+
+ctltScript.removeSpinner = function (props) {
+	var ivClassNames = [];
+	if (typeof props == 'undefined') {
+		var props = new Object;
+	}
+	if (!('parent' in props)) {
+		props.parent = jQuery('body');
+	}
+	if (!('exclusions' in props)) {
+		props.exclusions = ctltScript.spinnerExclusions;
+	}
+	if (!('classNames' in props)) {
+		props.classNames = [];
+	}
+
+	//console.log( jQuery('body').find('.cs-spinner').length );
+	if ('timer' in props) {
+		setTimeout(function () {
+			jQuery('.cs-spinner', props.parent).each(function (sk, sv) {
+				jQuery(sv).remove();
+			});
+			if (jQuery('body').find('.cs-spinner').length <= 0) {
+				jQuery('#spinnerOverlay').remove();
+				jQuery('body').find(':disabled').each(function (ik, iv) {
+					props.splitClasses = (typeof jQuery(iv).attr('class') != 'undefined' && jQuery(iv).attr('class') != '') ? jQuery(iv).attr('class').split(/\s+/) : [];
+					jQuery.each(props.splitClasses, function (ikc, ivc) {
+						if (props.exclusions.indexOf(ivc) < 0) {
+							jQuery(iv).prop('disabled', false);
+						}
+					});
+				});
+				ctltScript.spinningInProgress = 0;
+			}
+		}, props.timer);
+	} else {
+		jQuery('.cs-spinner', props.parent).each(function (sk, sv) {
+			jQuery(sv).remove();
+		});
+		if (jQuery('body').find('.cs-spinner').length <= 0) {
+			jQuery('#spinnerOverlay').remove();
+			jQuery('body').find(':disabled').each(function (ik, iv) {
+				props.splitClasses = (typeof jQuery(iv).attr('class') != 'undefined' && jQuery(iv).attr('class') != '') ? jQuery(iv).attr('class').split(/\s+/) : [];
+				jQuery.each(props.splitClasses, function (ikc, ivc) {
+					if (props.exclusions.indexOf(ivc) < 0) {
+						jQuery(iv).prop('disabled', false);
+					}
+				});
+			});
+		}
+		ctltScript.spinningInProgress = 0;
+	}
+}
+
+
+ctltScript.addSystemMessage = function (parentForMessage, message, alerttype) {
+	var defer = jQuery.Deferred();
+	var messageContainer;
+	var alertMethod = (typeof alerttype != 'undefined') ? 'alert-' + alerttype : 'alert-info'
+	if (jQuery('#systemMessage').length > 0) {
+		messageContainer = jQuery('#systemMessage');
+	} else {
+		messageContainer = jQuery.parseHTML('<div id="systemMessage" class="alert ' + alertMethod + '"></div>');
+	}
+	jQuery(messageContainer).html('<p id="messageContainer">' + message + '</p>');
+	jQuery(parentForMessage).prepend(messageContainer);
+	defer.resolve(messageContainer);
+	return defer.promise();
+}
+
+ctltScript.removeSystemMessage = function (ob) {
+	var systemMessage = (typeof ob != 'undefined') ? ob : jQuery('#systemMessage');
+	jQuery(systemMessage).remove();
+}
+
+if (ctltScript.jquery) { ctltScript.loadjQuery((ctltScript.jquery.ver) ? ctltScript.jquery.ver : ctltScript.defaultVersions.jquery) };
+if (ctltScript.bootstrap) { ctltScript.loadBootstrap((ctltScript.bootstrap.ver) ? ctltScript.bootstrap.ver : ctltScript.defaultVersions.bootstrap) };
+if (ctltScript.bootstraptable) { ctltScript.loadBootstrapTable((ctltScript.bootstraptable.ver) ? ctltScript.bootstraptable.ver : ctltScript.defaultVersions.bootstraptable) };
+if (ctltScript.jqueryui) { ctltScript.loadjQueryUI((ctltScript.jqueryui.ver) ? ctltScript.jqueryui.ver : ctltScript.defaultVersions.jqueryui) };
+if (ctltScript.jqueryUITouchPunch) { ctltScript.loadExtraPlugin('jquery.ui.touch-punch.min', 'jqueryUITouchPunch', (ctltScript.jqueryUITouchPunch.ver) ? ctltScript.jqueryUITouchPunch.ver : ctltScript.defaultVersions.jqueryUITouchPunch, (ctltScript.jqueryUITouchPunch.location) ? ctltScript.jqueryUITouchPunch.location : ctltScript.defaultScriptLocation) };
+if (ctltScript.swfobject) { ctltScript.loadswfObject((ctltScript.swfobject.ver) ? ctltScript.swfobject.ver : ctltScript.defaultVersions.swfobject) };
+if (ctltScript.tipped) { ctltScript.loadTipped((ctltScript.tipped.ver) ? ctltScript.tipped.ver : ctltScript.defaultVersions.tipped) };
+if (ctltScript.jqueryvalidate) { ctltScript.loadjQueryValidate((ctltScript.jqueryvalidate.ver) ? ctltScript.jqueryvalidate.ver : ctltScript.defaultVersions.jqueryvalidate) };
+if (ctltScript.accessibleTabs) { ctltScript.loadAccessibleTabs() };
+
+if (ctltScript.jscal) {
+	ctltScript.loadExtraPlugin('calendar', 'jscal', (ctltScript.jscal.ver) ? ctltScript.jscal.ver : ctltScript.defaultVersions.jscal, (ctltScript.jscal.location) ? ctltScript.jscal.location : ctltScript.defaultScriptLocation);
+	ctltScript.loadExtraPlugin('calendar-setup', 'jscal', (ctltScript.jscal.ver) ? ctltScript.jscal.ver : ctltScript.defaultVersions.jscal, (ctltScript.jscal.location) ? ctltScript.jscal.location : ctltScript.defaultScriptLocation);
+	ctltScript.loadExtraPlugin('calendar-en', 'jscal', (ctltScript.jscal.ver) ? ctltScript.jscal.ver : ctltScript.defaultVersions.jscal, (ctltScript.jscal.location) ? ctltScript.jscal.location : ctltScript.defaultScriptLocation);
+};
+if (ctltScript.ckeditor) {
+	if (typeof ctltScript.ckeditor.ver == 'undefined') {
+		ctltScript.ckeditor.ver = ctltScript.defaultVersions.ckeditor;
+	}
+
+	ctltScript.loadCkEditor((ctltScript.ckeditor.ver) ? ctltScript.ckeditor.ver : ctltScript.defaultVersions.ckeditor, ('loadjQueryAdapter' in ctltScript.ckeditor && (ctltScript.ckeditor.loadjQueryAdapter == 1 || Number(parseInt(ctltScript.ckeditor.loadjQueryAdapter)) == 1)));
+	document.write(`<script type="text/javascript" src="/core/views/common/javascripts/ckeditor/ckeCheckIfLoadedAndLoadCustomConfig.js"><\/script>`);     
+
+};
+if (ctltScript.tabber) { ctltScript.loadExtraPlugin('tabber', 'tabber', (ctltScript.tabber.ver) ? ctltScript.tabber.ver : ctltScript.defaultVersions.tabber, (ctltScript.tabber.location) ? ctltScript.tabber.location : ctltScript.defaultScriptLocation) };
+if (ctltScript.moment) { ctltScript.loadExtraPlugin('moment.min', 'moment', (ctltScript.moment.ver) ? ctltScript.moment.ver : ctltScript.defaultVersions.moment, (ctltScript.moment.location) ? ctltScript.moment.location : ctltScript.defaultScriptLocation) };
+
+
+if (ctltScript.highCharts) {
+    ctltScript.loadHighCharts((ctltScript.highCharts.ver) ? ctltScript.highCharts.ver : ctltScript.defaultVersions.highCharts, ('modules' in ctltScript.highCharts)?ctltScript.highCharts.modules:[]);
+};
+
+//if (ctltScript.pickadate)           {     ctltScript.loadPickadate((ctltScript.pickadate.ver)?ctltScript.pickadate.ver:ctltScript.defaultVersions.pickadate)};
+
+if (ctltScript.jqDoubleScroll) { ctltScript.loadjqDoubleScroll() };
+
+if (ctltScript.chosenDropDown) { ctltScript.loadChosenDropDown((ctltScript.chosenDropDown.ver) ? ctltScript.chosenDropDown.ver : ctltScript.defaultVersions.chosenDropDown) };
+if (ctltScript.datetimepicker) { ctltScript.loaddatetimepicker() };
+
+if (ctltScript.jqTablesorter) {
+	document.write('<script type="text/javascript" src="/core/views/common/javascripts/jqTableSorter/jquery.dimensions.min.js"><\/script>');
+	document.write('<script type="text/javascript" src="/core/views/common/javascripts/jqTableSorter/jquery.scrollableFixedHeaderTable.js"><\/script>');
+	document.write('<script type="text/javascript" src="/core/views/common/javascripts/jqTableSorter/jquery.tablesorter.js"><\/script>');
+};
+
+if (ctltScript.pagination) { ctltScript.loadPagination((ctltScript.pagination.ver) ? ctltScript.pagination.ver : ctltScript.defaultVersions.pagination) };
+if (ctltScript.jQueryPaginate) { ctltScript.loadJQueryPaginate() };
+if (ctltScript.jqueryForm) { ctltScript.jqueryForm((ctltScript.jqueryForm.ver) ? ctltScript.jqueryForm.ver : ctltScript.defaultVersions.jqueryForm) };
+
+ctltScript.loadFont();
+ctltScript.loadMathJax(ctltScript.defaultVersions.mathJax);
+if (navigator.appName == 'Microsoft Internet Explorer') {
+	if (window.attachEvent) {
+		window.attachEvent('onload', ctltScript.loadFontExec);
+	}
+	else {
+		if (window.onload) {
+			var curronload = window.onload;
+			var newonload = function () {
+				curronload();
+				ctltScript.loadFontExec();
+			};
+			window.onload = newonload;
+		}
+		else {
+			window.onload = ctltScript.loadfontexec;
+		}
+	}
+
+}
+
+/* ID creation functions - CS Wednesday, 10/19/2016 09:43:16 AM */
+ctltScript.defaultStringLength = 8;
+ctltScript.getRandomNumber = function (max, min) {
+	return parseInt(Math.random() * (max - min) + min);
+};
+
+ctltScript.getRandomNumericString = function (len) {
+	var strLen = (!(isNaN(Number(parseInt(len))))) ? Number(parseInt(len)) : ctltScript.defaultStringLength;
+	var text = "";
+	var possible = "0123456789";
+	for (var i = 0; i < strLen; i++) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	return text;
+};
+
+ctltScript.getRandomAlphaString = function (len) {
+	var strLen = (!(isNaN(Number(parseInt(len))))) ? Number(parseInt(len)) : ctltScript.defaultStringLength;
+	var text = "";
+	var possible = "abcdefghijklmnopqrstuvwxyz";
+	for (var i = 0; i < strLen; i++) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	return text;
+};
+
+ctltScript.getRandomAlphaNumericString = function (len) {
+	var strLen = (!(isNaN(Number(parseInt(len))))) ? Number(parseInt(len)) : ctltScript.defaultStringLength;
+	var text='';
+	var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+	for (var i = 0; i < strLen; i++) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	return text;
+};
+
+ctltScript.getRandomString = function (len) {
+	var strLen = (!(isNaN(Number(parseInt(len))))) ? Number(parseInt(len)) : ctltScript.defaultStringLength;
+	var text = "";
+	var possible = "^$%&*-.0123456789:?@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
+	for (var i = 0; i < strLen; i++) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	return text;
+};
+
+ctltScript.findClosestNumberInArray = function (num, arr) {
+	var curr = arr[0];
+	var diff = Math.abs(num - curr);
+	for (var val = 0; val < arr.length; val++) {
+		var newdiff = Math.abs(num - arr[val]);
+		if (newdiff < diff) {
+			diff = newdiff;
+			curr = arr[val];
+		}
+	}
+	return curr;
+}
+
+ctltScript.getTypeName = function (obj) {
+	return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+}
+
+ctltScript.serializeObject = function (obj) {
+	var o = {};
+	var a = jQuery(obj).serializeArray();
+	jQuery.each(a, function (k, v) {
+		if (o[v.name] !== undefined) {
+			if (!o[v.name].push) {
+				o[v.name] = [o[v.name]];
+			}
+			o[v.name].push(v.value || '');
+		} else {
+			o[v.name] = v.value || '';
+		}
+	});
+	return o;
+}
+
+ctltScript.isDarkColor = function (color) {
+	var hexcolor = (color) ? color.replace('#', '') : '';
+	if (hexcolor == '') return false;
+	var r = parseInt(hexcolor.substr(0, 2), 16);
+	var g = parseInt(hexcolor.substr(2, 2), 16);
+	var b = parseInt(hexcolor.substr(4, 2), 16);
+	var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+	return (yiq >= 128) ? true : false;
+};
+
+ctltScript.cleanLocalURL = function (url) {
+	var result, hostNames = ctltScript.definedServers;
+	hostNames.push(window.location.hostname.toLowerCase());
+	jQuery.each(hostNames, function (klk, klv) {
+		var regexData = new RegExp('^[a-z]{4,5}\:\/{2}' + klv);
+		url = url.replace(regexData, '');
+	});
+	return url;
+}
+
+/*
+	expects props={
+		event:{
+			currentTarget:{}
+		},
+		url:'',
+		stuID:0,
+		next:{}
+	}
+*/
+/*
+	required Numeric stuID,
+	required String statusID,
+	required String AY,
+	required Boolean isClosed
+*/
+ctltScript.changeAYOrTermStatus = function (props) {
+	var funcScope = {
+		params: {
+			statusID: '',
+			AY: (typeof jQuery(props.event.currentTarget).attr('data-academicyear') != 'undefined' && jQuery(props.event.currentTarget).attr('data-academicyear') != '') ? jQuery(props.event.currentTarget).attr('data-academicyear') : 0,
+			stuID: ('stuID' in props && !(isNaN(Number(parseInt(props.stuID))))) ? props.stuID : 0,
+			isClosed: 1
+		},
+		spinnerBox: ('spinnerBox' in props) ? props.spinnerBox : {},
+		terms: {
+			t0: 'status',
+			t1: 'SIStatus',
+			t3: 'termSStatus',
+			t4: 'term1Status',
+			t5: 'term2Status',
+			t6: 'WIStatus',
+			t7: 'term3Status',
+			t8: 'term4Status'
+		},
+		props: props,
+		next: ('next' in props) ? props.next : '#',
+		url: '/core/index.cfm/go/home.changeAYStatus',
+		termID: (typeof jQuery(props.event.currentTarget).attr('data-termid') != 'undefined' && jQuery(props.event.currentTarget).attr('data-termid') != '') ? jQuery(props.event.currentTarget).attr('data-termid') : 0,
+		isBanner: 0,
+		target: ('event' in props && 'currentTarget' in props.event) ? props.event.currentTarget : '',
+		icon: ''
+	};
+	funcScope.params.statusID = ('t' + funcScope.termID in funcScope.terms) ? funcScope.terms['t' + funcScope.termID] : '';
+
+	// If container is open, close it
+	funcScope.icon = jQuery(props.event.currentTarget).find(".glyphicon").eq(0);
+	if (jQuery(funcScope.icon).hasClass("glyphicon-chevron-down")) {
+		jQuery(funcScope.icon).removeClass('glyphicon-chevron-down');
+		jQuery(funcScope.icon).addClass('glyphicon-chevron-right');
+
+		// If user clicked on AY header, this.id is the AY, if the user clicked on a term
+		// header, they need to get the AY from the previous .bannerAY
+		funcScope.params.isClosed = 1;
+	} else if (jQuery(funcScope.icon).hasClass("glyphicon-chevron-right")) {
+		// If container is closed, open it
+		jQuery(funcScope.icon).removeClass('glyphicon-chevron-right');
+		jQuery(funcScope.icon).addClass('glyphicon-chevron-down');
+
+		funcScope.params.isClosed = 0;
+	}
+	ctltScript.addSpinner(funcScope.spinnerBox);
+	jQuery(funcScope.next).slideToggle();
+	jQuery.ajax({
+		url: funcScope.url,
+		type: 'post',
+		data: funcScope.params
+	}).done(function (data) {
+		funcScope.response = data;
+		ctltScript.removeSpinner({ parent: funcScope.spinnerBox });
+	}).fail(function (data, err) {
+		data.funcScope = funcScope;
+		ctltScript.removeSpinner({ parent: funcScope.spinnerBox });
+	});
+};
+
+Date.prototype.setCTLStandard = function (def) {
+	switch (def.toLowerCase()) {
+		case 'open':
+		case 'start':
+			this.setHours(0, 0, 0);
+			break;
+		case 'end':
+		case 'close':
+			this.setHours(23, 59, 59);
+			break;
+	}
+	return this;
+}
+
+//extending Date
+Date.prototype.DateAdd = function (pattern, increment) {
+	var safeIncrement = (isNaN(Number(parseInt(increment))) === false) ? Number(parseInt(increment)) : 0;
+	var processedString = new String(pattern);
+	var safePattern = (processedString != undefined && processedString != null && processedString != '') ? processedString : 'dd';
+	switch (safePattern.toLowerCase()) {
+		case 'h':
+		case 'hh':
+		case 'hour':
+		case 'hours':
+			this.setHours(this.getHours() + safeIncrement);
+			break;
+		case 'n':
+		case 'nn':
+		case 'minute':
+		case 'minutes':
+			this.setMinutes(this.getMinutes() + safeIncrement);
+			break;
+		case 's':
+		case 'ss':
+		case 'second':
+		case 'seconds':
+			this.setSeconds(this.getSeconds() + safeIncrement);
+			break;
+		case 'w':
+		case 'ww':
+		case 'week':
+		case 'weeks':
+			this.setDate(this.getDate() + parseInt(safeIncrement * 7));
+			break;
+		case 'm':
+		case 'mm':
+		case 'month':
+		case 'months':
+			this.setMonth(this.getMonth() + safeIncrement);
+			break;
+		case 'y':
+		case 'yy':
+		case 'yyyy':
+		case 'year':
+		case 'years':
+			this.setYear(this.getYear() + safeIncrement);
+			break;
+		default:
+			this.setDate(this.getDate() + parseInt(safeIncrement));
+			break;
+	}
+	return this;
+};
+
+Date.prototype.LocaleFormat = function () {
+	var strippedText = jQuery(this)
+	return this.toLocaleString('en-US').replace(/:\d{2}\s/, ' ').replace(/[^ -~]/g, '').replace(',', '');
+};
+
+/* Object */
+Object.filter = function (obj, ignore, invert) {
+	if (ignore === undefined) {
+		return obj;
+	}
+	invert = invert || false;
+	var not = function (condition, yes) { return yes ? !condition : condition; };
+	var isArray = (ctltScript.getTypeName(ignore) == 'array') ? true : false;
+	for (var key in obj) {
+		if (obj.hasOwnProperty(key)
+			&& isArray === true
+			&& (
+				not((ignore.indexOf(key) >= 0), invert) ? true : false
+					|| not((ignore.call(undefined, key, obj[key]) === false), invert)
+			)
+		) {
+			delete obj[key];
+		}
+	}
+	return obj;
+};
+
+/* Array */
+Array.prototype.cpLen = function () {
+	return (isNaN(this.length) === false) ? this.length : 0;
+}
+
+Array.prototype.cpTrim = function (n) {
+	var chars = (n != null) ? n : 0;
+	if (isNaN(Number(parseInt(chars))) === false && Number(parseInt(chars)) > 0) return this.splice(0, chars);
+	return this;
+}
+
+Array.prototype.unique = function () {
+	var a = [];
+	var l = this.length;
+	for (var i = 0; i < l; i++) {
+		for (var j = i + 1; j < l; j++) {
+			if (this[i] === this[j])  // If this[i] is found later in the array
+				j = ++i;
+		}
+		a.push(this[i]);
+	}
+	return a;
+};
+
+/* String */
+String.prototype.isValid = function (t) {
+	var type = (t != null) ? t : 'string';
+	switch (type.toLowerCase()) {
+		case 'numeric':
+			return (isNaN(Number(parseFloat(this.cpTrim()))) === false) ? true : false;
+		case 'int':
+			return (isNaN(Number(parseInt(this.cpTrim()))) === false) ? true : false;
+		case 'absolute':
+			return (isNaN(Number(parseInt(this.cpTrim()))) === false && Number(parseInt(this.cpTrim())) > 0) ? true : false;
+		case 'boolean':
+			switch (this.toLowerCase()) {
+				case 'true':
+				case 'yes':
+				case '1':
+				case 't':
+				case 'false':
+				case 'no':
+				case '0':
+				case 'f':
+					return true;
+				default:
+					return false;
+			}
+		case 'passfail':
+			switch (this.toLowerCase()) {
+				case 'true':
+				case 'yes':
+				case 'p':
+				case 't':
+				case '100':
+				case 'false':
+				case 'no':
+				case '0':
+				case 'f':
+					return true;
+				default:
+					return false;
+			}
+		case 'lettergrade':
+			var letterGrades = ['a', 'b', 'c', 'd', 'e', 'f'];
+			if (letterGrades.indexOf(this.toLowerCase()) > -1) return true;
+			return false;
+		case 'percentage':
+			return (isNaN(Number(parseFloat(this.cpTrim()))) === false
+				&& Number(parseFloat(this.cpTrim())) >= 0
+				&& Number(parseFloat(this.cpTrim())) <= 100
+			) ? true : false;
+		case 'date':
+		case 'time':
+			return (new Date(this.cpTrim()) !== "Invalid Date") && !isNaN(new Date(this.cpTrim())) ? true : false;
+		case 'email':
+			var pattern = new RegExp("/[a-z0-9!#$%&'*+\/=?^_{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_{|}~-‌​]+)*@(?:[a-z0-9](?:[‌​a-z0-9-]*[a-z0-9])?\‌​.)+[a-z0-9][a-z0-9-]‌​*[a-z0-9]/");
+			return pattern.test(this);
+		default:
+			return true;
+	}
+}
+
+String.prototype.convertTo = function (t) {
+	var type = (t != null) ? t : 'string';
+	switch (type.toLowerCase()) {
+		case 'numeric':
+			return (isNaN(Number(parseFloat(this.cpTrim()))) === false) ? Number(parseFloat(this.cpTrim())) : 0;
+		case 'int':
+			return (isNaN(Number(parseInt(this.cpTrim()))) === false) ? Number(parseInt(this.cpTrim())) : 0;
+		case 'boolean':
+			switch (this.toLowerCase()) {
+				case 'true':
+				case 'yes':
+				case '1':
+				case 't':
+				case 'p':
+				case '100':
+					return true;
+				default:
+					return false;
+			}
+		case 'percentage':
+			var num = (isNaN(Number(parseFloat(this.cpTrim()))) === false) ? Number(parseFloat(this.cpTrim())) : 0;
+			if (num < 0) num = 0;
+			if (num > 100) num = 100;
+			return num;
+		case 'passfail':
+			switch (this.toLowerCase()) {
+				case 'true':
+				case 'yes':
+				case 't':
+				case 'p':
+				case '100':
+					return 'P';
+				case '':
+					return '';
+				default:
+					return 'F';
+			}
+		case 'lettergrade':
+			var letterGrades = ['a', 'b', 'c', 'd', 'e', 'f'];
+			if (letterGrades.indexOf(this.toLowerCase()) > -1) {
+				return this.toUpperCase();
+			} else {
+				return '';
+			}
+		case 'date':
+		case 'time':
+			return (new Date(this.cpTrim()) !== "Invalid Date") && !isNaN(new Date(this.cpTrim())) ? new Date(this.cpTrim()) : new Date('12/31/1969 23:59:59');
+	}
+}
+
+String.prototype.cpClean = function () {
+	return this.replace(/[^\x00-\x7F]/g, '').replace(/\\/g, "");
+}
+
+String.prototype.cpLen = function () {
+	return this.cpTrim().length;
+}
+
+String.prototype.cpTrim = function (n) {
+	var chars = (n != null) ? n : 0;
+	var cleanString = this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+	if (isNaN(Number(parseInt(chars))) === false && Number(parseInt(chars)) > 0) return cleanString.substring(0, chars);
+	return cleanString;
+};
