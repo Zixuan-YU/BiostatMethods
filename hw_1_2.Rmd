@@ -1,0 +1,86 @@
+---
+title: "hw2_1_2"
+author: "Zixuan Yu"
+date: "2/25/2022"
+output: html_document
+---
+
+```{r}
+library(here)
+here()
+```
+
+```{r}
+datapath <- here("Methods in Biostatistics III - Online Library_files")
+setwd(datapath)
+getwd()
+```
+
+```{r}
+y <- c(-0.1, 2.9, 6.2, 7.3, 10.7)
+x <- matrix(c(1,1,1,1,1,1,3,5,7,9),nrow=5,ncol=2) ## The design matrix
+x
+```
+
+```{r}
+y
+```  
+**2.Write an R function that takes the vector Y and matrix X as input then calculates and returns each the following components:**   
+**a.the least squares estimates of the regression coefficients**  
+```{r}
+lse <- function(x,y){
+    matrix(solve(t(x) %*% x) %*% t(x) %*% y, 2, 1)    
+}
+lse(x,y)
+```
+**b.the variance-covariance matrix of the least squares estimates**  
+```{r}
+vcm <- function(x,y){
+    H = x %*% solve(t(x) %*% x) %*% t(x)
+    yhat = H  %*% y
+    yvar = sum((y-yhat)^2)/(length(y)-2)
+    vcmatrix = yvar * solve(t(x) %*% x) 
+vcmatrix
+}
+vcm(x,y)
+```
+
+**c.the correlation between the two regression coefficients**    
+```{r}
+corr_beta <- function(x,y){
+vcmatrix = vcm(x,y)
+vcmatrix[1,2]/(sqrt(vcmatrix[1,1])*sqrt(vcmatrix[2,2]))
+}
+corr_beta(x,y)
+```
+
+
+**d.the vector of predicted values X(X’X)-1X’Y = HY**  
+
+```{r}
+cpred <- function(x,y){
+    H = x %*% solve(t(x) %*% x) %*% t(x)
+    H  %*% y
+}
+cpred(x,y)
+```
+
+**e.the vector of residuals (I- X(X’X)-1X’)Y = (I-H)Y.**
+```{r}
+vres <- function(x,y){
+    H = x %*% solve(t(x) %*% x) %*% t(x)
+    (diag(nrow(H))-H) %*% y
+}
+vres(x,y)
+```
+
+**3.	Using the R function from Question 2, verify your estimates of the simple linear regression intercept and slope computed in Question 1.  Using the standard error estimate for the simple linear regression model slope, construct a 95% confidence interval for the true slope.**   
+```{r}
+lse(x,y) ## same as what I got in Question1 
+```
+
+```{r}
+var_beta = vcm(x,y)[2,2]
+beta_1 = lse(x,y)[2]
+beta_1 + c(-1,1)*qt(0.975,df=3)*sqrt(var_beta)
+```
