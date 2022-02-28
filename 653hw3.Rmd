@@ -1,0 +1,16 @@
+---
+title: "653 Problem Set 3"
+author: "Zixuan Yu"
+output: html_document
+---
+
+The goals of the analysis are to:  
+1)	Determine if the average growth rates of children differ by mother’s parity (number of previous live births)  
+2)	Estimate the population variation in weights of 6-month old Nepali children and estimate the population variation in annual growth rates of Nepali children  
+
+### Part I:  Get familiar with the data  
+**1.Make a table of mother’s parity (alive variable).  Ideally, we would compare children of nulliparous women to categories of women of parity > 0.  However, in this data set, there are only 19 children from nulliparous women.  So, we will create two categories of women:  parity ≤ 3 (i.e. 1 to 4 live births) vs. parity > 3 (5 or more live births).**  
+```{r}
+
+
+```
