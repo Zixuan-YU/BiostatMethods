@@ -1,0 +1,541 @@
+---
+title: "Problem Set 4"
+author: "Zixuan Yu"
+output: pdf_document
+---
+
+##### QUESTION:  How does mean pulse pressure differ by age, sex and race? 
+
+```{r}
+setwd("C:/Users/19092/OneDrive - Johns Hopkins/Term3/Biostat653")
+library(readr)
+dat <- read_csv("./Data/hw4.2018.nhanes.csv")
+head(dat)
+```
+
+```{r}
+library(dplyr)
+d <- dat %>% select(id, age, female, race, bp.sys, bp.di, height, weight, bmi)
+table(complete.cases(d))
+```
+
+```{r}
+d.cc <- d[complete.cases(d),]
+length(unique(d.cc$id)); ##No duplicate id -> No duplicate record
+str(d.cc)
+```
+
+```{r}
+## Though there is no missing values, some of the blood pressure is 0, which is invalid
+## I remove there record
+sum(d.cc$bp.di==0)
+sum(d.cc$bp.sys==0) 
+```
+
+```{r}
+d2 <- d.cc[d.cc$bp.di!=0,]
+table(d2$bp.sys)
+table(d2$bp.di)
+```
+
+```{r}
+d2 <- d2 %>% filter(bp.di>30)
+## Filter out unreasonable values
+## threshold for systolic bp: 80–250 mm 
+## for diastolic bp:  30–120 mm 
+```
+
+
+```{r}
+d2 <- d2 %>% mutate(pp=bp.sys-bp.di)
+table(d2$race);summary(d2$pp)
+```
+
+```{r}
+#Pulse Presssure General Trend
+library(ggplot2)
+p1 <- d2 %>% ggplot(aes(x=age, y=pp))+ 
+    geom_jitter(alpha=0.8)+
+    geom_smooth(method = 'loess')+ 
+    ggtitle("Pulse Presssure General Trend")+
+    labs(y="Pulse Presssure",x="Age (in Years)") +
+    theme(plot.title = element_text(hjust = 0.5))+
+      theme(panel.border = element_blank(), 
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.line = element_line(colour = "black"),
+            plot.title = element_text(size = 12, face = "bold")) 
+p1
+```
+
+```{r}
+#Pulse Presssure Stratified by Gender across Races
+race_labs <- c( '1' = "Hispanic",
+                 '2' = "Non-Hispanic white",
+                 '3' = "Non-Hispanic black",
+                 '4' = "Other")
+p2 <- d2 %>% ggplot(aes(x=age, y=pp, color = factor(female)))+ 
+    geom_jitter(alpha=0.2)+
+    geom_smooth(method = 'loess', size = 1.1,aes(x=age, y=pp, color = factor(female)))+ 
+    scale_color_manual(name = "Gender",labels = c("Male", "Female"),values = c("Indianred1", "cornflowerblue"))+
+    facet_wrap(~race, nrow = 2,
+               labeller = as_labeller(race_labs))+
+    ggtitle("Pulse Presssure Stratified by Gender across Races")+
+    labs(y="Pulse Presssure",x="Age (in Years)") +
+    theme_classic()+
+    theme(plot.title = element_text(hjust = 0.5))+
+    theme(legend.title=element_text(size=8),
+                legend.text=element_text(size=7))
+p2
+```
+
+
+```{r}
+
+#Pulse Presssure Stratified by Gender across Races
+p3 <-d2 %>% 
+    ggplot(aes(x=age, y=pp, color = as.factor(race)))+ 
+    geom_jitter(alpha=0.2)+
+    geom_smooth(method = 'loess', size = 1.1,aes(x=age, y=pp, color = as.factor(race)))+ 
+    scale_color_manual(name = "Race",labels = c("Hispanic","Non-Hispanic white","Non-Hispanic black","Other"),values = c("#d7191c","#fdae61","#abdda4","#2b83ba"))+
+     #scale_color_brewer(palette = "Set2")+ 
+    #scale_color_manual(name = "Race",labels = c("Hispanic","Non-Hispanic white","Non-Hispanic black","Other"),values = c("#66c2a5","#fc8d62","#8da0cb","#e78ac3"))+
+    #scale_color_manual(name = "Race",labels = c("Hispanic","Non-Hispanic white","Non-Hispanic black","Other"),values = c("Indianred4","#1b7837","#0571b0","#542788"))+
+    #facet_wrap(~race, nrow = 2,labeller = as_labeller(race_labs))+
+    ggtitle("Pulse Presssure Stratified by Race")+
+    labs(y="Pulse Presssure",x="Age (in Years)") +
+    theme_bw()+
+    theme(plot.title = element_text(hjust = 0.5))+
+          theme(panel.border = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.line = element_line(colour = "black"),
+            plot.title = element_text(size = 12, face = "bold"))
+#"#66c2a5","#fc8d62","#8da0cb","#e78ac3"
+#"#ef8a62","#f1b6da","#d1e5f0","#2166ac"
+#"#d7191c","#fdae61","#abdda4","#2b83ba"
+p3
+```
+
+```{r}
+p4 <- d2 %>% ggplot()+
+    geom_boxplot( aes(x = factor(race), y = pp, group = race, fill = factor(race), color =factor(race)))+
+    theme_bw()+
+    scale_fill_discrete(name = "Race",labels=c("Hispanic","Non-Hispanic White","Non-Hispanic Black", "Other"))+
+    scale_color_manual(name = "Race",labels = "",values = c("#d7191c","#1b7837","#0571b0","#542788"))+
+    ggtitle('Boxplot for Pulse Pressure by Race')+
+    ylab('pulse pressure')+
+    xlab('race')+
+    guides(color=F)+
+    theme_bw()+
+    theme(plot.title = element_text(hjust = 0.5))+      
+    theme(panel.border = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.line = element_line(colour = "black"),
+            plot.title = element_text(size = 12, face = "bold"))
+p4
+```
+
+```{r}
+d2%>%group_by(race) %>% summarise(mean_pp = mean(pp))
+```
+
+```{r}
+d2 %>% filter(race %in% c(1,2,3)) %>% summarise(mean_pp = mean(pp))
+```
+
+
+It is obvious that there is non-linear relationship between age and pulse pressure, so I decided to add a spline term at age=45. I define age_sp45 as $=(age-45)^+ = age-45$ if age>45, 0 if not.  
+```{r}
+d2 <- d2 %>% mutate(age_sp45=ifelse(age-45>0,age-45,0))
+```
+
+It is intuitive to fit a multiple linear regression model to the data.
+```{r}
+model1 <- lm(pp~age+age_sp45+female+race,data = d2)
+summary(model1)
+```
+
+```{r}
+model2 <- lm(pp~age + age_sp45 + race +female:age +female:age_sp45,data = d2)
+summary(model2)
+AIC(model2)
+```
+
+```{r}
+library(lmtest)
+lrtest(model1, model2)
+```
+
+
+```{r}
+model3 <- lm(pp~age+age_sp45+race + female + female:age +female:age_sp45 +race:age +race:age_sp45,data = d2)
+summary(model3)
+AIC(model3)
+```
+
+## Model Checking for model 3
+
+```{r}
+d2$res_m3 = residuals(model3)
+qqnorm(scale(d2$res_m3))
+abline(0,1,col='red')
+```
+
+```{r}
+pres_lm <- ggplot(d2, aes(x = age, y = res_m3))+
+geom_jitter(alpha = 0.7)+
+geom_smooth()+
+labs(y = "Residuals", x = 'Age')+
+geom_hline(yintercept = 0, color = "red") +
+    theme(plot.title = element_text(hjust = 0.5))+
+          theme(legend.title=element_text(size=9),
+                legend.text=element_text(size=8),
+              panel.border = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.line = element_line(colour = "black"),
+            plot.title = element_text(size = 12, face = "bold"))
+pres_lm
+```
+## Residuals Squares
+```{r}
+pressq_lm <- ggplot(d2, aes(x = age, y = res_m3^2))+
+geom_jitter(alpha = 0.7)+
+geom_smooth()+
+labs(y = "Residuals Squares", x = 'Age')+
+geom_hline(yintercept = 0, color = "red") +
+    theme(plot.title = element_text(hjust = 0.5))+
+          theme(legend.title=element_text(size=9),
+                legend.text=element_text(size=8),
+              panel.border = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.line = element_line(colour = "black"),
+            plot.title = element_text(size = 12, face = "bold"))
+pressq_lm
+```
+
+
+Using the `gls` command to allow variance to change as age grows:  
+```{r}
+model11 = lm(pp ~ age +age_sp45 +female + race +female:age +female:age_sp45, data= d2)
+summary(model11)
+AIC(model11)
+d2$fit_m11 = model11$fitted.values
+d2$res_m11 = model11$residuals
+```
+
+```{r}
+library(nlme)
+model21 = gls(pp ~ age + age_sp45 + race + female,
+              weights = varFunc(~age),data = d2)
+summary(model21)
+AIC(model21)
+#d2$fit_m23 = model23$fitted.values
+#d2$res_m23 = model23$residuals
+```
+
+```{r}
+model22 = gls(pp ~ age + age_sp45 + race + female +
+                  female:age + female:age_sp45,
+              weights = varFunc(~age),data = d2)
+summary(model22)
+AIC(model22)
+```
+
+
+```{r}
+model23 = gls(pp ~ age + age_sp45 + race + female + 
+                  female:age + female:age_sp45 +
+                  race:age + race:age_sp45,
+              weights = varFunc(~age),data = d2)
+summary(model23)
+AIC(model23)
+#d2$fit_m23 = model23$fitted.values
+#d2$res_m23 = model23$residuals
+```
+```{r}
+AIC(model1)
+AIC(model2)
+AIC(model3)
+AIC(model21)
+AIC(model22)
+AIC(model23)
+```
+
+```{r}
+lrtest(model21, model22)
+```
+
+```{r}
+lrtest(model21, model23)
+```
+
+```{r}
+lrtest(model22, model23)
+```
+
+
+
+## Model Checking for model 23
+```{r}
+d2$fit_m23 = predict(model23)
+d2$res_m23 = residuals(model23)
+qqnorm(scale(d2$res_m23))
+abline(0,1,col='red')
+```
+## Residuals
+```{r}
+pres <- ggplot(d2, aes(x = age, y = res_m23))+
+geom_jitter(alpha = 0.7)+
+geom_smooth()+
+labs(y = "Residuals", x = 'Age')+
+geom_hline(yintercept = 0, color = "red") +
+    theme(plot.title = element_text(hjust = 0.5))+
+          theme(legend.title=element_text(size=9),
+                legend.text=element_text(size=8),
+              panel.border = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.line = element_line(colour = "black"),
+            plot.title = element_text(size = 12, face = "bold"))
+pres
+
+```
+
+## Residuals Squares
+```{r}
+pressq <- ggplot(d2, aes(x = age, y = res_m23^2))+
+geom_jitter(alpha = 0.7)+
+geom_smooth()+
+labs(y = "Residuals Squares", x = 'Age')+
+geom_hline(yintercept = 0, color = "red") +
+    theme(plot.title = element_text(hjust = 0.5))+
+          theme(legend.title=element_text(size=9),
+                legend.text=element_text(size=8),
+              panel.border = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.line = element_line(colour = "black"),
+            plot.title = element_text(size = 12, face = "bold"))
+pressq
+
+```
+
+
+
+```{r}
+#Pulse Presssure Stratified by Gender across Races
+#Predict value by model23 vs. true values
+p33 <-d2 %>% 
+    ggplot(aes(x=age, y=pp, color = as.factor(race)))+ 
+    geom_jitter(alpha=0.2)+
+    geom_line(size = 1.5,aes(x=age, y=fit_m23, color = as.factor(race)))+ 
+    scale_color_manual(name = "Predicted Value by Race",labels = c("Hispanic","Non-Hispanic white","Non-Hispanic black","Other"),values = c("#d7191c","#fdae61","#abdda4","#2b83ba"))+
+    ggtitle("Predicted Pulse Presssure Stratified by Race")+
+    labs(y="Pulse Presssure",x="Age (in Years)") +
+    theme(plot.title = element_text(hjust = 0.5))+
+          theme(legend.title=element_text(size=7),
+                legend.text=element_text(size=6.5),
+              panel.border = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            axis.line = element_line(colour = "black"),
+            plot.title = element_text(size = 12, face = "bold"))
+p33
+```
+
+```{r}
+qqnorm(scale(d2$res_m23))
+abline(0,1, col='red', lwd=2)
+```
+
+```{R}
+## check model
+ggplot(d2, aes(x = age, y = res_m11))+
+geom_jitter(alpha = 0.7)+
+geom_smooth()+
+labs(y = "Residuals", x = 'Age')+
+geom_hline(yintercept = 0, color = "red") +
+theme_bw()
+```
+
+```{r}
+#my.dfbetas = as.data.frame(dfbetas(fit))
+#fit = lm(y~ ….)
+#my.dfbetas = as.data.frame(dfbetas(fit))
+```
+
+  
+Bootstrap Standard Error and 95% Confidence Interval  
+between female and male  
+#race:age + race:age_sp45
+```{r}
+library(boot)
+pp.est <- function(data, id){
+ dt <- data[id,] # allows boot to select sample
+ fit1 <- gls(pp ~ age + age_sp45 + race + female + 
+                  female:age + female:age_sp45 +
+                  race:age + race:age_sp45,
+              weights = varFunc(~age),data = dt)
+ diff35 <- coef(fit1)[5] + 35*coef(fit1)[6]
+ diff55 <- coef(fit1)[5] + 55*coef(fit1)[6] + 10*coef(fit1)[7]
+ diff75 <- coef(fit1)[5] + 75*coef(fit1)[6] + 30*coef(fit1)[7]
+ c(diff35,diff55,diff75)
+}
+set.seed(520)
+pp.result <- boot(d2, pp.est, R=2009)
+pp.result
+```
+```{r}
+#The element $t contains a total number of R values (i.e. number of bootstrap samples) for each statistic generated by the bootstrap procedure:
+head(pp.result$t)
+```
+```{r}
+pp.bootci <- sapply(1:3,function(x) boot.ci(pp.result,index = x,type = "basic")$basic[4:5]) 
+pp.boot.result <- data.frame(rbind(pp.result$t0,pp.bootci))
+rownames(pp.boot.result) <- c("Est","Lower","Upper")
+colnames(pp.boot.result) <- c("diff35","diff55","diff75")
+round(pp.boot.result, 3)
+```
+
+The average difference between female and male at age 35 is -2.92 (95% CI: -3.84 to -1.97), at age 55 is 0.82 (95% CI: -0.22 to -1.92), at age 75 is 3.81 (95% CI: 1.70 to 5.87).    
+
+```{r fig.width=12, fig.height=5}
+#final plots in report
+library(gridExtra)
+grid.arrange(p1, p3, nrow = 1, top = "Figure A",left = "A", right="B")
+```
+
+```{r fig.width=12.5, fig.height=9}
+library(ggpubr)
+ggarrange(p1, p2, p, p33,nrow =  2,ncol = 2, labels = c("A", "B","C", "D"))
+```
+```{r}
+tTable<-as.data.frame(summary(model23)$tTable[,c('Value', 'Std.Error', 'p-value')])
+tTable$variable <- rownames(tTable)
+ci<-as.data.frame(round(confint(model23, level = 0.95), 2))
+ci$variable <- rownames(ci)
+coef_table <- left_join(tTable, ci, by = 'variable')
+table1 <- coef_table[,c("variable", "Value", "Std.Error", 'p-value', '2.5 %', '97.5 %')]
+table1$significant = table1$`p-value`<0.05
+table1
+```
+
+```{r}
+library(knitr)
+knitr::kable(table1)
+```
+## pp change rate of woman aged 20-45
+```{r}
+library(multcomp)
+summary(glht(model23, linfct = "`age` + `age:female`=0"))
+```
+## 95% CI for pp change rate of woman aged 20-45
+```{r}
+se_female1 = 0.07160
+-0.07579 + c(-1,1)*qnorm(0.975)*se_female1
+```
+
+#### pp change rate of male aged 45-80
+```{r}
+library(multcomp)
+summary(glht(model23, linfct = "`age` + `age_sp45`=0"))
+```
+#### 95% CI for pp change rate of male aged 45-80
+```{r}
+se_man45 =  0.06578
+0.79152 + c(-1,1)*qnorm(0.975)*se_man45
+```
+
+
+#### pp change rate of female aged 45-80
+```{r}
+library(multcomp)
+summary(glht(model23, linfct = "`age`+`age_sp45`+`age:female` + `age_sp45:female`=0"))
+```
+
+#### 95% CI for pp change rate of female aged 45-80
+```{r}
+se_woman45 =  0.06437
+0.94114 + c(-1,1)*qnorm(0.975)*se_woman45
+```
+
+#### pp difference in change rate , female vs male
+```{r}
+library(multcomp)
+summary(glht(model23, linfct = "`age:female` + `age_sp45:female`=0"))
+```
+
+#### 95% CI for pp difference in change rate , female vs male
+```{r}
+se_diff45 =  0.04849 
+0.14962 + c(-1,1)*qnorm(0.975)*se_diff45
+```
+
+### Second Object:
+Potential mediation effect of Height, BMI, weight
+
+#### Check for Height
+```{r}
+model23 = gls(pp ~ age + age_sp45 + race + female + 
+                  female:age + female:age_sp45 +
+                  race:age + race:age_sp45,
+              weights = varFunc(~age),data = d2)
+## Regress Height on Age 
+model23_h = gls(height ~ age + age_sp45 + race + female + 
+                  female:age + female:age_sp45 +
+                  race:age + race:age_sp45,
+              weights = varFunc(~age),data = d2)
+
+summary(model23_h)
+```
+## Height does not change significant as age change, so no evidence for mediation effect. (p=0.0534 for age, 0.9987 for age_sp)  
+
+#### Check for Height
+```{r}
+## Regress Weight on Age 
+model23_w = gls(weight ~ age + age_sp45 + race + female + 
+                  female:age + female:age_sp45 +
+                  race:age + race:age_sp45,
+              weights = varFunc(~age),data = d2)
+
+summary(model23_w)
+```
+Weight changes significantly as age changes.  -> potential mediator  
+```{r}
+## Add Weight to the model
+model23_medw = gls(pp~ age + age_sp45 + weight + race + female + 
+                  female:age + female:age_sp45 +
+                  race:age + race:age_sp45,
+              weights = varFunc(~age),data = d2)
+
+coef(model23_medw)[c('age','age_sp45')]
+coef(model23)[c('age','age_sp45')]
+```
+
+#### Check for BMI
+```{r}
+## Regress Weight on Age 
+model23_b = gls(bmi ~ age + age_sp45 + race + female + 
+                  female:age + female:age_sp45 +
+                  race:age + race:age_sp45,
+              weights = varFunc(~age),data = d2)
+
+summary(model23_b)
+```
+
+BMI changes significantly as age changes -> potential mediator  
+```{r}
+## Add Weight to the model
+model23_medb = gls(pp~ age + age_sp45 + bmi + race + female + 
+                  female:age + female:age_sp45 +
+                  race:age + race:age_sp45,
+              weights = varFunc(~age),data = d2)
+
+coef(model23_medb)[c('age','age_sp45')]
+coef(model23)[c('age','age_sp45')]
+```
+
